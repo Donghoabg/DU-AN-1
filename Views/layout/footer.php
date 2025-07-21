@@ -1,10 +1,10 @@
- <!-- Scroll to top start -->
+ 
  <div class="scroll-top not-visible">
         <i class="fa fa-angle-up"></i>
     </div>
-    <!-- Scroll to Top End -->
+    
 
-    <!-- footer area start -->
+    
     <footer class="footer-widget-area">
         <div class="footer-top section-padding">
             <div class="container">
@@ -15,14 +15,14 @@
                                 <div class="widget-logo">
                                     <a href="index.html">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 300 100">
-                    <!-- Snowflake -->
+                    
                     <circle cx="50" cy="50" r="40" fill="none" stroke="lightblue" stroke-width="3" />
                     <line x1="50" y1="10" x2="50" y2="90" stroke="lightblue" stroke-width="2" />
                     <line x1="10" y1="50" x2="90" y2="50" stroke="lightblue" stroke-width="2" />
                     <line x1="20" y1="20" x2="80" y2="80" stroke="lightblue" stroke-width="2" />
                     <line x1="80" y1="20" x2="20" y2="80" stroke="lightblue" stroke-width="2" />
 
-                    <!-- LuxeWinter text -->
+                    
                     <a class="navbar-brand fw-bold" href="index.php?act=home">
                 <text x="110" y="55" font-family="Georgia, serif" font-size="36" fill="silver">
                         Luxe
@@ -89,13 +89,13 @@
                                 <input type="email" class="news-field" id="mc-email" autocomplete="off" placeholder="Enter your email address">
                                 <button class="news-btn" id="mc-submit">Subscribe</button>
                             </form>
-                            <!-- mail-chimp-alerts Start -->
+                            
                             <div class="mailchimp-alerts">
-                                <div class="mailchimp-submitting"></div><!-- mail-chimp-submitting end -->
-                                <div class="mailchimp-success"></div><!-- mail-chimp-success end -->
-                                <div class="mailchimp-error"></div><!-- mail-chimp-error end -->
+                                <div class="mailchimp-submitting"></div>
+                                <div class="mailchimp-success"></div>
+                                <div class="mailchimp-error"></div>
                             </div>
-                            <!-- mail-chimp-alerts end -->
+                            
                         </div>
                     </div>
                     <div class="col-md-6">
