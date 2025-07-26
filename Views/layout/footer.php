@@ -118,7 +118,20 @@
             </div>
         </div>
     </footer>
-    
+    <script src="./views/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="./views/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="./views/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="./views/assets/js/plugins/slick.min.js"></script>
+    <script src="./views/assets/js/plugins/countdown.min.js"></script>
+    <script src="./views/assets/js/plugins/nice-select.min.js"></script>
+    <script src="./views/assets/js/plugins/jqueryui.min.js"></script>
+    <script src="./views/assets/js/plugins/image-zoom.min.js"></script>
+    <script src="./views/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="./views/assets/js/plugins/ajaxchimp.js"></script>
+    <script src="./views/assets/js/plugins/ajax-mail.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
+    <script src="./views/assets/js/plugins/google-map.js"></script>
+    <script src="./views/assets/js/main.js"></script>
     
 </body>
 
