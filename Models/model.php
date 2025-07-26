@@ -128,6 +128,41 @@ class TaiKhoan{
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function updateTaiKhoan($id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai, $anh_dai_dien = null)
+    {
+
+        try {
+            $sql = "UPDATE tai_khoans 
+                    SET 
+                    ho_ten = :ho_ten,
+                    email = :email,
+                    so_dien_thoai = :so_dien_thoai,
+                    ngay_sinh = :ngay_sinh,
+                    gioi_tinh = :gioi_tinh,
+                    dia_chi = :dia_chi,
+                    trang_thai = :trang_thai";
+            $params = [
+                ':ho_ten' => $ho_ten,
+                ':email' => $email,
+                ':so_dien_thoai' => $so_dien_thoai,
+                ':ngay_sinh' => $ngay_sinh,
+                ':gioi_tinh' => $gioi_tinh,
+                ':dia_chi' => $dia_chi,
+                ':trang_thai' => $trang_thai,
+                ':id' => $id
+            ];
+            if ($anh_dai_dien) {
+                $sql .= ", anh_dai_dien = :anh_dai_dien";
+                $params[':anh_dai_dien'] = $anh_dai_dien;
+            }
+            $sql .= " WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($params);
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
 
    
     
