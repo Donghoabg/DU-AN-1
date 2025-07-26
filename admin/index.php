@@ -96,13 +96,5 @@ match ($act) {
   'sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
   'sua-mat-khau-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
   
-  // bieu do thong ke
-//   'bieu-do' => (new AdminBaoCaoThongKeController)->bieuDo(),
 
-  // router quản lý bình luận
-//   'list-binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
-//   'xoa-binh-luan' => (new AdminBinhLuanController())->xoaBinhLuan(),
-//   // 'duyet-binh-luan' => (new AdminBinhLuanController())->duyetBinhLuan(),
-//   'chi-tiet-binh-luan' => (new AdminBinhLuanController())->chiTietBinhLuan(),
-//   'binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
 };
