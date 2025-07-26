@@ -28,7 +28,7 @@
                          <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                      </div>
                      <div class="info">
-                         <a href="#" class="d-block">Minh</a>
+                         <a href="#" class="d-block">Admin</a>
                      </div>
                  </div>
 
@@ -80,7 +80,7 @@
                                 <p>Quản lý bình luận</p>
                             </a>
                         </li> -->
-                         <li class="nav-item">
+                         <!-- <li class="nav-item">
                              <a href="#" class="nav-link">
                                  <i class="nav-icon fas fa-user"></i>
                                  <p>Quản lý tài khoản</p>
@@ -98,7 +98,7 @@
                                          <i class="nav-icon far fa-user"></i>
                                          <p>Tài khoản khách hàng</p>
                                      </a>
-                                 </li>
+                                 </li> -->
                                  <!-- <li class="nav-item">
                                      <a href="<?= 'index.php?act=form-sua-thong-tin-ca-nhan-quan-tri' ?>" class="nav-link">
                                          <i class="nav-icon far fa-user"></i>
