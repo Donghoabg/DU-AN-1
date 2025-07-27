@@ -241,5 +241,96 @@ class TaiKhoanController{
         }
 
     
-}
+    // Kiểm tra lỗi
+            $errors = [];
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Họ tên không được để trống';
+            }
+            if (empty($so_dien_thoai)) {
+                $errors['so_dien_thoai'] = 'Số điện thoại không được để trống';
+            }
+            if (empty($dia_chi)) {
+                $errors['dia_chi'] = 'Địa chỉ không được để trống';
+            }
+            if (empty($email)) {
+                $errors['email'] = 'Email không được để trống';
+            }
+            if (empty($errors)) {
+                // Nếu không có lỗi, gọi model để cập nhật thông tin
+                $status = $this->modelTaiKhoan->updateTaiKhoan($tai_khoan_id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai, $file_thumb);
+                if ($status) {
+                    $_SESSION['successTt'] = "Đã đổi thông tin thành công";
+                    $_SESSION['flash'] = true;
+                    header("Location: " . BASE_URL . '?act=tai-khoan');
+                    exit();
+                } else {
+                    $_SESSION['errors']['update'] = 'Cập nhật thất bại. Vui lòng thử lại.';
+                }
+            } else {
+                $_SESSION['errors'] = $errors;
+            }
+            header("Location: " . BASE_URL . '?act=tai-khoan');
+            exit();
+        }
+        
+    
+
+    public function doiMatKhau()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy thông tin từ form
+
+            $old_pass = htmlspecialchars(trim($_POST['old_pass']));
+            $new_pass = htmlspecialchars(trim($_POST['new_pass']));
+            $confirm_pass = htmlspecialchars(trim($_POST['confirm_pass']));
+
+            // Lấy thông tin user từ session
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+
+            // Kiểm tra mật khẩu cũ
+            $errors = [];
+            if (empty($old_pass)) {
+                $errors['old_pass'] = 'Mật khẩu cũ không được để trống';
+            } elseif ($old_pass !== $user['mat_khau']) {
+                $errors['old_pass'] = 'Mật khẩu cũ không đúng';
+            }
+
+            // Kiểm tra mật khẩu mới
+            if (empty($new_pass)) {
+                $errors['new_pass'] = 'Mật khẩu mới không được để trống';
+            }
+
+            // Kiểm tra xác nhận mật khẩu
+            if (empty($confirm_pass)) {
+                $errors['confirm_pass'] = 'Mật khẩu nhập lại không được để trống';
+            } elseif ($new_pass !== $confirm_pass) {
+                $errors['confirm_pass'] = 'Mật khẩu nhập lại không đúng';
+            }
+
+            // Nếu có lỗi, lưu vào session và chuyển hướng
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                $_SESSION['flash'] = true;
+                header("Location:" . BASE_URL . '?act=tai-khoan');
+                exit();
+            }
+
+            // Nếu không có lỗi, cập nhật mật khẩu mới
+            $hashPass = $new_pass;
+            $status = $this->modelTaiKhoan->resetPassword($user['id'], $hashPass);
+            // var_dump($hashPass);
+            // die();
+
+            if ($status) {
+                $_SESSION['success'] = "Đã đổi mật khẩu thành công";
+                $_SESSION['flash'] = true;
+            } else {
+                $_SESSION['errors']['system'] = "Có lỗi xảy ra, vui lòng thử lại sau.";
+            }
+
+            // Chuyển hướng sau khi xử lý
+            header("Location:" . BASE_URL . '?act=tai-khoan');
+            exit();
+        }
+    }
 }
