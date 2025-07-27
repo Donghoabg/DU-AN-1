@@ -163,6 +163,26 @@ class TaiKhoan{
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function binhLuan($tai_khoan_id, $san_pham_id, $noi_dung, $ngay_dang)
+    {
+        try {
+            $sql = "INSERT INTO binh_luans (tai_khoan_id,san_pham_id,noi_dung,ngay_dang) VALUES (:tai_khoan_id, :san_pham_id,:noi_dung,:ngay_dang)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':tai_khoan_id' => $tai_khoan_id,
+                    ':san_pham_id' => $san_pham_id,
+                    ':noi_dung' => $noi_dung,
+                    ':ngay_dang' => $ngay_dang,
+
+                ]
+            );
+
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
 
    
     
