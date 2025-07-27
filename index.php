@@ -17,7 +17,7 @@ require_once './controllers/DanhMuc.php';
 
 require_once './models/TaiKhoan.php';
 
-
+$controller = new HomeController();
 
 
 $act = $_GET['act'] ?? '/';

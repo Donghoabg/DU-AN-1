@@ -1,0 +1,88 @@
+.lsmh-center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 60vh;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.lsmh-status-badge {
+    display: inline-block;
+    min-width: 110px;
+    padding: 6px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 16px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: #6c757d;
+}
+.lsmh-status-badge.paid {
+    background: #27ae60;
+}
+.lsmh-status-badge.unpaid {
+    background: #e74c3c;
+}
+.lsmh-status-badge.processing {
+    background: #f39c12;
+}
+.lsmh-status-badge.shipping {
+    background: #2980b9;
+}
+.lsmh-status-badge.success {
+    background: #2ecc71;
+}
+.lsmh-status-badge.cancel {
+    background: #b71c1c;
+}
+
+.lsmh-action-group {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+.lsmh-action-btn {
+    display: inline-block;
+    min-width: 120px;
+    padding: 8px 14px;
+    font-family: 'Segoe UI Semibold', 'Segoe UI', 'Roboto', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.2px;
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    background: #d81b60;
+    box-shadow: 0 2px 8px rgba(216,27,96,0.08);
+    transition: background 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lsmh-action-btn.cancel {
+    background: #b71c1c;
+    box-shadow: 0 2px 8px rgba(183,28,28,0.10);
+    padding: 8px 18px;
+    font-size: 15px;
+    min-width: 0;
+}
+.lsmh-action-btn:hover {
+    background: #ad1457;
+    filter: brightness(1.08);
+}
+.lsmh-action-btn.cancel:hover {
+    background: #7f1010;
+    filter: brightness(1.08);
+}
+.lsmh-action-btn * {
+    color: #fff !important;
+}

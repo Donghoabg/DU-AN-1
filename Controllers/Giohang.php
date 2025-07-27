@@ -18,7 +18,7 @@ class GioHangDonHangController{
         $this->modelDonHang = new DonHang();
     }
 
-    public addGioHang(){
+    public function addGioHang(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_SESSION['user_client'])) {
                 $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);

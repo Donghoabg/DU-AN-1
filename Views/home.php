@@ -122,9 +122,11 @@
                 </div>
 
 
-                                                </div>
-                                                <a
-                                                    href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                        <?php foreach ($sanPhamBanChay as $sanPham): ?>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <figure class="product-item">
+                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <img src="path/to/image.jpg" alt="<?= $sanPham['ten_san_pham'] ?>" />
                                                     <div class="cart-hover"><button class="btn btn-cart">Xem chi
                                                             tiết</button>
                                                 </a>
@@ -186,12 +188,14 @@
                     <?php foreach ($listSanPham as $key => $sanPham): ?>
                         <!-- product item start -->
                         <div class="product-item">
-                            
-                                    ?>
-                                        <div class="product-label new">
-                                            <span>Mới </span>
-                                        </div>
-                                    <?php }
+                            <figure class="product-img">
+                                <img src="<?= $sanPham['hinh_anh'] ?>" alt="<?= $sanPham['ten_san_pham'] ?>">
+                                
+                                <?php if (isset($sanPham['moi']) && $sanPham['moi']) : ?>
+                                    <div class="product-label new">
+                                        <span>Mới</span>
+                                    </div>
+                                <?php endif; ?><?php
                                     if ($sanPham['gia_khuyen_mai']) { ?>
                                         <div class="product-label discount">
                                             <span>Giảm giá</span>
