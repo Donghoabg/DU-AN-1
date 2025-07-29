@@ -397,21 +397,23 @@ class AdminSanPhamController
         header("Location: " . BASE_URL_ADMIN . '?act=chi-tiet-khach-hang&id_khach_hang=' . $tai_khoan_id);
     }
 
+    // Hàm ẩn sản phẩm (chuyển trạng thái sản phẩm sang ẩn)
     public function anSanPham() {
-        $id = $_GET['id_san_pham'] ?? null;
-        if ($id) {
-            $this->modelSanPham->anSanPham($id);
+        $id = $_GET['id_san_pham'] ?? null; // Lấy id sản phẩm từ URL, nếu không có thì gán null
+        if ($id) { // Nếu có id sản phẩm
+            $this->modelSanPham->anSanPham($id); // Gọi hàm model để ẩn sản phẩm theo id
         }
-        header('location: ' . BASE_URL_ADMIN . '?act=san-pham');
-        exit();
+        header('location: ' . BASE_URL_ADMIN . '?act=san-pham'); // Chuyển hướng về trang danh sách sản phẩm
+        exit(); // Kết thúc hàm
     }
 
+    // Hàm hiện sản phẩm (chuyển trạng thái sản phẩm sang hiện)
     public function hienSanPham() {
-        $id = $_GET['id_san_pham'] ?? null;
-        if ($id) {
-            $this->modelSanPham->hienSanPham($id);
+        $id = $_GET['id_san_pham'] ?? null; // Lấy id sản phẩm từ URL, nếu không có thì gán null
+        if ($id) { // Nếu có id sản phẩm
+            $this->modelSanPham->hienSanPham($id); // Gọi hàm model để hiện sản phẩm theo id
         }
-        header('location: ' . BASE_URL_ADMIN . '?act=san-pham');
-        exit();
+        header('location: ' . BASE_URL_ADMIN . '?act=san-pham'); // Chuyển hướng về trang danh sách sản phẩm
+        exit(); // Kết thúc hàm
     }
 }
