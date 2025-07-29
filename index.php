@@ -24,7 +24,7 @@ require_once './models/TaiKhoan.php';
 require_once './models/GioHang.php';
 require_once './models/DonHang.php';
 
-
+$controller = new HomeController();
 
 // Require toàn bộ file Views
 

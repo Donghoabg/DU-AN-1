@@ -33,7 +33,9 @@ class SanPhamController
             exit();
         }
     }
+
     public function guiBinhLuan()
+ 
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['binh_luan'], $_POST['san_pham_id'])) {
             if (isset($_SESSION['user_client'])) {

@@ -18,7 +18,7 @@ class DanhMucController {
             $iddm = $_GET['danh_muc_id'];
             $spdm = $this->modelSanPham->sanPhamTheoDanhMuc($iddm);
 
-            $listDanhMuc = $this->modelSanPham->getaAllDanhMuc();
+            $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
             require_once './Views/sanPhamTheoDanhMuc.php';
         }else{
             $listDanhMuc = $this->modelSanPham->getAllDanhmuc();

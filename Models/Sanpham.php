@@ -108,10 +108,44 @@ class SanPham
             return false;
         }
     }
-    
+public function top10()
+{
+    try {
+        $sql = "SELECT * FROM san_phams WHERE is_hidden = 0 ORDER BY luot_xem DESC LIMIT 10";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+}
 
 
+    public function getAllDanhMuc()
+    {
+        try {
+            $sql = "SELECT * FROM danh_mucs WHERE trang_thai = 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
 
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
 
-    
+    public function sanPhamTheoDanhMuc($id)
+    {
+        try {
+            $sql = "SELECT san_phams.* FROM san_phams
+            INNER JOIN danh_mucs ON danh_mucs.id  = san_phams.danh_muc_id
+            WHERE san_phams.danh_muc_id = :id AND danh_mucs.trang_thai = 1 AND san_phams.is_hidden = 0 ORDER BY id DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }    
 }
