@@ -2,6 +2,8 @@
 <?php require_once 'layout/menu.php'; ?>
 
 
+
+
 <main>
     <section class="slider-area">
         <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
