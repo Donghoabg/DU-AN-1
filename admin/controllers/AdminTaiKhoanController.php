@@ -299,25 +299,24 @@ class AdminTaiKhoanController
         }
     }
 
-
-
-
-    public function logout()
-    {
-        if (isset($_SESSION['user_admin'])) {
-            unset($_SESSION['user_admin']);
-            header('Location:' . BASE_URL_ADMIN . '?act=login-admin');
-        }
+    // Đăng xuất tài khoản admin
+public function logout()
+{
+    // Kiểm tra nếu đã đăng nhập admin
+    if (isset($_SESSION['user_admin'])) {
+        unset($_SESSION['user_admin']); // Xóa thông tin đăng nhập khỏi session
+        header('Location:' . BASE_URL_ADMIN . '?act=login-admin'); // Chuyển hướng về trang đăng nhập admin
     }
+}
 
-    public function formEditCaNhanQuanTri()
-    {
-        $email = $_SESSION['user_admin'];
-        $thongTin = $this->modelTaiKhoan->getTaiKhoanformEmail($email);
+public function formEditCaNhanQuanTri()
+{
+    $email = $_SESSION['user_admin']; // Lấy email admin từ session
+    $thongTin = $this->modelTaiKhoan->getTaiKhoanformEmail($email); // Lấy thông tin tài khoản admin từ DB
 
-        require_once './views/taikhoan/canhan/editCaNhan.php';
-        deleteSessionErrors();
-    }
+    require_once './views/taikhoan/canhan/editCaNhan.php'; // Hiển thị form sửa thông tin cá nhân
+    deleteSessionErrors(); // Xóa lỗi session nếu có
+}
 
 
     public function postEditMatKhauCaNhan()

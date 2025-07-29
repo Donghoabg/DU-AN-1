@@ -108,18 +108,18 @@ class SanPham
             return false;
         }
     }
-    public function top10()
-    {
-        try {
-            $sql = "SELECT * FROM san_phams WHERE is_hidden = 0 ORDER BY luot_xem DESC LIMIT 10";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([]);
-
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "Lỗi: " . $e->getMessage();
-        }
+public function top10()
+{
+    try {
+        $sql = "SELECT * FROM san_phams WHERE is_hidden = 0 ORDER BY luot_xem DESC LIMIT 10";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
     }
+}
+
 
     public function getAllDanhMuc()
     {
