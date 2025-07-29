@@ -10,6 +10,7 @@ require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminDonHangController.php';
+require_once './controllers/AdminBinhLuanController.php';
 
 // Require toàn bộ file Models
 require_once './models/AdminSanPham.php';
@@ -17,6 +18,7 @@ require_once './models/AdminDanhMuc.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminDonHang.php';
 require_once './models/AdminThongKe.php';
+require_once './models/AdminBinhLuan.php';
 
 
 // Require toàn bộ file Views
@@ -94,5 +96,13 @@ match ($act) {
   'sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
   'sua-mat-khau-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
   
+  // bieu do thong ke
+  'bieu-do' => (new AdminBaoCaoThongKeController)->bieuDo(),
 
+  // router quản lý bình luận
+  'list-binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
+  'xoa-binh-luan' => (new AdminBinhLuanController())->xoaBinhLuan(),
+  // 'duyet-binh-luan' => (new AdminBinhLuanController())->duyetBinhLuan(),
+  'chi-tiet-binh-luan' => (new AdminBinhLuanController())->chiTietBinhLuan(),
+  'binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
 };
