@@ -128,6 +128,8 @@ class TaiKhoan{
             echo "Lỗi: " . $e->getMessage();
         }
     }
+
+   
     public function updateTaiKhoan($id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai, $anh_dai_dien = null)
     {
 
@@ -183,8 +185,4 @@ class TaiKhoan{
             echo "Lỗi: " . $e->getMessage();
         }
     }
-
-   
-    
-    
 }
