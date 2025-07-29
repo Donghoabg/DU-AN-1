@@ -2,8 +2,6 @@
 <?php require_once 'layout/menu.php'; ?>
 
 
-
-
 <main>
     <section class="slider-area">
         <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
@@ -152,11 +150,9 @@
 
 
 
-                        <?php foreach ($sanPhamBanChay as $sanPham): ?>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <figure class="product-item">
-                                                <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
-                                                    <img src="path/to/image.jpg" alt="<?= $sanPham['ten_san_pham'] ?>" />
+                                                </div>
+                                                <a
+                                                    href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                                     <div class="cart-hover"><button class="btn btn-cart">Xem chi
                                                             tiết</button>
                                                 </a>
@@ -217,16 +213,7 @@
                     <?php foreach ($listSanPham as $key => $sanPham): ?>
                         <!-- product item start -->
                         <div class="product-item">
-
-                            <figure class="product-img">
-                                <img src="<?= $sanPham['hinh_anh'] ?>" alt="<?= $sanPham['ten_san_pham'] ?>">
-                                
-                                <?php if (isset($sanPham['moi']) && $sanPham['moi']) : ?>
-                                    <div class="product-label new">
-                                        <span>Mới</span>
-                                    </div>
-                                <?php endif; ?><?php
-                          <figure class="product-thumb">
+                            <figure class="product-thumb">
                                 <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                                     <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product" style="width: 300px; height:250px;">
                                     <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
@@ -242,7 +229,6 @@
                                             <span>Mới </span>
                                         </div>
                                     <?php }
-
                                     if ($sanPham['gia_khuyen_mai']) { ?>
                                         <div class="product-label discount">
                                             <span>Giảm giá</span>

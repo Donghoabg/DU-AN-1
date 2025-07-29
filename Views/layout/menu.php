@@ -7,7 +7,7 @@
                   <div class="row align-items-center position-relative">
 
                       <div class="col-lg-2">
-                          <div class="logo">`
+                          <div class="logo">
                               <a href="<?= BASE_URL ?>">
                               <div class="logo">
                             <a class="navbar-brand fw-bold" href="<?= BASE_URL ?>" style="cursor:pointer;">
@@ -116,7 +116,7 @@
                               </div>
                           </div>
                       </div>
-s
+
                   </div>
               </div>
           </div>
