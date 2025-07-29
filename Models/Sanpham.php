@@ -108,18 +108,38 @@ class SanPham
             return false;
         }
     }
-public function top10()
-{
-    try {
-        $sql = "SELECT * FROM san_phams WHERE is_hidden = 0 ORDER BY luot_xem DESC LIMIT 10";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    } catch (Exception $e) {
-        echo "Lỗi: " . $e->getMessage();
-    }
-}
 
+
+
+
+    public function search($keyword)
+    {
+        try {
+            $sql = "SELECT * FROM san_phams
+            WHERE ten_san_pham LIKE :keyword AND is_hidden = 0
+            ORDER BY luot_xem DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':keyword' => '%' . $keyword . '%',
+            ]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            throw new Exception("Error searching for products: " . $e->getMessage());
+        }
+    }
+    public function top10()
+    {
+        try {
+            $sql = "SELECT * FROM san_phams WHERE is_hidden = 0 ORDER BY luot_xem DESC LIMIT 10";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    
 
     public function getAllDanhMuc()
     {
@@ -134,6 +154,7 @@ public function top10()
         }
     }
 
+
     public function sanPhamTheoDanhMuc($id)
     {
         try {
@@ -147,5 +168,36 @@ public function top10()
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
-    }    
+    }
+    public function deleteBinhLuan($id)
+    {
+        try {
+            $sql = "DELETE FROM binh_luans WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':id' => $id
+                ]
+            );
+
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function getDetailBinhLuan($id)
+    {
+        try {
+            $sql = "SELECT * FROM binh_luans WHERE id = :id ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':id' => $id
+                ]
+            );
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
 }
