@@ -1,6 +1,5 @@
 <?php
-require_once './models/TrangThaiThanhToan.php';
-require_once './models/SanPham.php';
+
 
 class HomeController
 {
@@ -13,9 +12,10 @@ class HomeController
 
     public function __construct()
     {
-        $this->modelTaiKhoan = new TaiKhoan();
         $this->modelSanPham = new SanPham();
-
+        $this->modelTaiKhoan = new TaiKhoan();
+        $this->modelGioHang = new GioHang();
+        $this->modelDonHang = new DonHang();
     }
 
 

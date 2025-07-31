@@ -1,7 +1,8 @@
 <?php
 
 
-class TaiKhoanController{
+class TaiKhoanController
+{
     public $modelSanPham;
     public $modelTaiKhoan;
     public $modelGioHang;
@@ -78,6 +79,7 @@ class TaiKhoanController{
         require_once('./views/auth/formDangKy.php');
         deleteSessionErrors();
     }
+
     public function dangKy()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -238,10 +240,8 @@ class TaiKhoanController{
                 require_once './commons/function.php';
                 $file_thumb = uploadFile($anh_dai_dien, './uploads/');
             }
-        }
 
-    
-    // Kiểm tra lỗi
+            // Kiểm tra lỗi
             $errors = [];
             if (empty($ho_ten)) {
                 $errors['ho_ten'] = 'Họ tên không được để trống';
@@ -272,8 +272,7 @@ class TaiKhoanController{
             header("Location: " . BASE_URL . '?act=tai-khoan');
             exit();
         }
-        
-    
+    }
 
     public function doiMatKhau()
     {
