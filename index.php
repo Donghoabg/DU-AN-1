@@ -29,13 +29,13 @@ $controller = new HomeController();
 // Require toàn bộ file Views
 
 // Route
-$act = $_GET['act'] ?? '/';
+$act = $_GET['act'] ?? 'home';
 
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
 
-    '/' => (new HomeController())->home(),
+    'home' => (new HomeController())->home(),
     // Trang chủ
     'chi-tiet-san-pham' => (new SanPhamController())->chitietSanPham(),
     'gui-binh-luan' => (new SanPhamController())->guiBinhLuan(),
