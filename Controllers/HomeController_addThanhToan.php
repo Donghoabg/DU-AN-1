@@ -23,7 +23,7 @@ class HomeController
             $arrTrangThaiDonHang = $this->modelDonHang->getTrangThaiDonHang();
             $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
             $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();
-            $PhuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
+            $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
             $arrTrangThaiThanhToan = $this->modelTrangThaiThanhToan->getAll();
             $trangThaiThanhToan = array_column($arrTrangThaiThanhToan, 'ten_trang_thai', 'id');
             $donHangs = $this->modelDonHang->getDonHangFromUser($tai_khoan_id);
