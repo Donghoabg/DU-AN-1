@@ -224,7 +224,7 @@ class GioHangDonHangController
 
             foreach ($chiTietGioHang as $sanPham) {
                 // var_dump($sanPham);die();
-                if ($sanPham['gia_khuyen_mai'] > 0 || $sanPham['gia_khuyen_mai'] == null) {
+                if (!empty($sanPham['gia_khuyen_mai']) && $sanPham['gia_khuyen_mai'] > 0) {
                     $don_gia = $sanPham['gia_khuyen_mai'];
                 } else {
                     $don_gia = $sanPham['gia_san_pham'];
@@ -316,9 +316,9 @@ public function xoaSp()
         }
 
         // Gọi model để lấy danh sách đơn hàng
-        $userId = $_SESSION['user_id'];
+        $userId = ['user_id'];
         $donHangModel = new DonHang();
-        $orders = $donHangModel->getOrdersByUser($userId);
+        $orders = $this->$donHangModel->getOrdersByUser($userId);
 
         // Truyền dữ liệu sang view
         require_once './views/lich-su-don-hang.php';
