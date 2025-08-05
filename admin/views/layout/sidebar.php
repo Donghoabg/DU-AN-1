@@ -10,10 +10,9 @@
                     
                     <!-- Chữ phong cách thư pháp Nhật -->
                     <text x="75" y="45" font-family="'Brush Script MT', cursive, serif" font-size="32" fill="#fff" font-weight="bold" style="letter-spacing: 2px;">
-                        Thời Trang
+                        SENMOOD
                     </text>
                     <text x="75" y="70" font-family="'Brush Script MT', cursive, serif" font-size="20" fill="#fff" style="letter-spacing: 1.5px;">
-                        ミンニャット
                     </text>
                     </svg>
                  <!--  -->
