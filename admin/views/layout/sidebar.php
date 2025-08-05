@@ -73,13 +73,13 @@
                                  </p>
                              </a>
                          </li>
-                         <!-- <li class="nav-item">
+                         <li class="nav-item">
                             <a href="index.php?act=binh-luan" class="nav-link">
                                 <i class="nav-icon fas fa-comments"></i>
                                 <p>Quản lý bình luận</p>
                             </a>
-                        </li> -->
-                         <!-- <li class="nav-item">
+                        </li>
+                          <li class="nav-item">
                              <a href="#" class="nav-link">
                                  <i class="nav-icon fas fa-user"></i>
                                  <p>Quản lý tài khoản</p>
@@ -97,13 +97,13 @@
                                          <i class="nav-icon far fa-user"></i>
                                          <p>Tài khoản khách hàng</p>
                                      </a>
-                                 </li> -->
-                                 <!-- <li class="nav-item">
+                                 </li>
+                                  <li class="nav-item">
                                      <a href="<?= 'index.php?act=form-sua-thong-tin-ca-nhan-quan-tri' ?>" class="nav-link">
                                          <i class="nav-icon far fa-user"></i>
                                          <p>Tài khoản cá nhân</p>
                                      </a>
-                                 </li> -->
+                                 </li>
                              </ul>
                          </li>
 
