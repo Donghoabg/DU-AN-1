@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
              <!-- Brand Logo -->
-             <a href="../../index3.html" class="brand-link text-center">
+             <a href="<?= BASE_URL ?>" class="brand-link text-center">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" role="img" aria-label="Logo Thời Trang Minh Nhật" style="width:220px; height:auto;">
                     <!-- Nền tròn đỏ tượng trưng mặt trời Nhật Bản -->
                     <circle cx="40" cy="40" r="30" fill="#E60012" />

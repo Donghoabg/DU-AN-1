@@ -20,7 +20,7 @@
                      </a>
                      </li>
                      <li class="nav-item"></li>
-                     <a class="nav-link" href="<?='?act=logout-admin'?>" onclick="return confirm('Bạn muốn đăng xuất tài khoản')">
+                     <a class="nav-link" href="<?= BASE_URL ?>" onclick="return confirm('Bạn muốn đăng xuất tài khoản')">
                          <i class="fas fa-sign-out-alt"></i>
                      </a>
                     </li>
