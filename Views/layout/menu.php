@@ -16,11 +16,9 @@
                                 
                                 <path d="M22 55 L22 25 L30 45 L38 25 L38 55" stroke="#fff" stroke-width="5" fill="none" stroke-linejoin="round"/>
                                 
-                                <text x="75" y="45" font-family="'Brush Script MT', cursive, serif" font-size="32" fill="#222" font-weight="bold" style="letter-spacing: 2px;">
-                                    Thời trang
-                                </text>
-                                <text x="75" y="70" font-family="'Brush Script MT', cursive, serif" font-size="20" fill="#555" style="letter-spacing: 1.5px;">
-                                    ミンニャット
+                                <!-- Chữ phong cách thư pháp Nhật -->
+                                <text x="80" y="50" font-family="'Brush Script MT', cursive, serif" font-size="28" fill="#222" font-weight="bold" style="letter-spacing: 1.5px;">
+                                    SENMOOD
                                 </text>
                                 </svg>
                             </a>
@@ -35,7 +33,6 @@
                                   <nav class="desktop-menu">
                                       <ul>
                                           <li><a href="<?= BASE_URL ?>">Trang chủ <i></i></a>
-
                                           </li>
 
                                           <li class="dropdown">

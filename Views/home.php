@@ -53,7 +53,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="policy-item">
                         <div class="policy-icon">
-                            <i class="pe-7s-plane"></i>
+                            <i class="fa fa-truck"></i>
                         </div>
                         <div class="policy-content">
                             <h6>Giao hàng</h6>
@@ -64,7 +64,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="policy-item">
                         <div class="policy-icon">
-                            <i class="pe-7s-help2"></i>
+                            <i class="fa fa-headphones"></i>
                         </div>
                         <div class="policy-content">
                             <h6>Hộ trợ</h6>
@@ -75,7 +75,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="policy-item">
                         <div class="policy-icon">
-                            <i class="pe-7s-back"></i>
+                            <i class="fa fa-undo"></i>
                         </div>
                         <div class="policy-content">
                             <h6>Hoàn tiền</h6>
@@ -86,7 +86,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="policy-item">
                         <div class="policy-icon">
-                            <i class="pe-7s-credit"></i>
+                            <i class="fa fa-credit-card"></i>
                         </div>
                         <div class="policy-content">
                             <h6>Thanh toán</h6>
