@@ -185,45 +185,70 @@
                                     </div>
 
                                     <p class="pro-desc"><?= $sanPham['mo_ta'] ?></p>
-                                    <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST" onsubmit="return themVaoGioHangAjax(this, event)">
-                                        <div class="quantity-cart-box d-flex align-items-center">
-                                            <h6 class="option-title">Số lượng:</h6>
-                                            <div class="quantity">
-                                                <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-                                                <div class="pro-qty">
-                                                    <input type="number" value="1" name="so_luong" min="1" max="<?= $sanPham['so_luong'] ?>">
-                                                    <div id="soLuongMsg" class="so-luong-error" style="display: none;"></div>
+                                    <form action="submit.php" method="post" style="font-family: Arial, sans-serif;">
+                                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+                                            KÍCH THƯỚC 
+                                            <span style="text-decoration: underline; font-size: 14px; color: #333; cursor: pointer;">
+                                            Hướng Dẫn Chọn Size
+                                            </span>
+                                        </div>
+
+                                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                            <input type="radio" name="size" value="2XL" id="s2xl" style="display: none;">
+                                            <label for="s2xl" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">2XL</label>
+
+                                            <input type="radio" name="size" value="XL" id="sxl" style="display: none;">
+                                            <label for="sxl" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">XL</label>
+
+                                            <input type="radio" name="size" value="L" id="sl" style="display: none;">
+                                            <label for="sl" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">L</label>
+
+                                            <input type="radio" name="size" value="M" id="sm" style="display: none;">
+                                            <label for="sm" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">M</label>
+                                        </div>
+
+                                        <button type="submit" style="margin-top: 15px; padding: 8px 20px; cursor: pointer;">Xác Nhận</button>
+                                        </form>
+                                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST" onsubmit="return themVaoGioHangAjax(this, event)">
+
+                                            <div class="quantity-cart-box d-flex align-items-center">
+                                                <h6 class="option-title">Số lượng:</h6>
+                                                <div class="quantity">
+                                                    <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                    <div class="pro-qty">
+                                                        <input type="number" value="1" name="so_luong" min="1" max="<?= $sanPham['so_luong'] ?>">
+                                                        <div id="soLuongMsg" class="so-luong-error" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="action_link">
+                                                    <button class="btn btn-cart2" type="submit">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </div>
-                                            <div class="action_link">
-                                                <button class="btn btn-cart2" type="submit">Thêm vào giỏ hàng</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <script>
-                                    function themVaoGioHangAjax(form, event) {
-                                        event.preventDefault();
-                                        var formData = new FormData(form);
-                                        fetch('<?= BASE_URL . '?act=them-gio-hang' ?>', {
-                                            method: 'POST',
-                                            body: formData
-                                        })
-                                        .then(response => response.text())
-                                        .then(data => {
-                                            alert('Đã thêm vào giỏ hàng!');
-                                        })
-                                        .catch(error => {
-                                            alert('Có lỗi xảy ra!');
-                                        });
-                                        return false;
-                                    }
-                                    </script>
+                                        </form>
+                                <script>
+                                function themVaoGioHangAjax(form, event) {
+                                    event.preventDefault();
+                                    var formData = new FormData(form);
+                                    fetch('<?= BASE_URL . '?act=them-gio-hang' ?>', {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        alert('Đã thêm vào giỏ hàng!');
+                                    })
+                                    .catch(error => {
+                                        alert('Có lỗi xảy ra!');
+                                    });
+                                    return false;
+                                }
+                                </script>
 
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- product details inner end -->
+                </div>
+                <!-- product details inner end -->
 
                     <!-- product details reviews start -->
                     <div class="product-details-reviews section-padding pb-0">
