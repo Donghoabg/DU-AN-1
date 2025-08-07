@@ -3,6 +3,7 @@ session_start();
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
 require_once './commons/function.php'; // Hàm hỗ trợ
+require_once './controllers/ProductController.php';
 
 
 // thư viện php mailer
@@ -53,6 +54,7 @@ match ($act) {
 
     //sanpham
     'san-pham-theo-danh-muc' => (new DanhMucController())->sanPhamDanhMuc(),
+    'products' => (new ProductController())->index(),
 
 
     // Giỏ hàng ,đơn hàng
