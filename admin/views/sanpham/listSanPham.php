@@ -48,6 +48,9 @@ include "./views/layout/header.php"
                                     <a href="?act=form-them-san-pham">
                                         <button class="btn btn-success">Thêm Sản Phẩm</button>
                                     </a>
+                                    <a href="?act=san-pham-bi-an">
+                                        <button class="btn btn-secondary">Sản phẩm bị ẩn</button>
+                                    </a>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -91,13 +94,17 @@ include "./views/layout/header.php"
                                                                 href="?act=form-sua-san-pham&id_san_pham=<?= $sanpham['id']  ?>">
                                                                 <button class=" btn btn-warning">Sửa </button>
                                                             </a>
+                                                                <!-- <a href="?act=xoa-san-pham&id_san_pham=<?= $sanpham['id'] ?>"
+                                                                onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')">
+                                                                <button class="btn btn-danger">Xóa</button>
+                                                            </a> -->
                                                             <?php if ($sanpham['is_hidden'] == 1): ?>
                                                                 <a href="?act=hien-san-pham&id_san_pham=<?= $sanpham['id'] ?>" onclick="return confirm('Bạn có chắc muốn hiện lại sản phẩm này không?')">
                                                                     <button class="btn btn-success">Hiện lại</button>
                                                                 </a>
                                                             <?php else: ?>
                                                                 <a href="?act=an-san-pham&id_san_pham=<?= $sanpham['id'] ?>" onclick="return confirm('Bạn có chắc muốn ẩn sản phẩm này không?')">
-                                                                    <button class="btn btn-secondary">Ẩn</button>
+                                                                    <button class="btn btn-danger">Ẩn</button>
                                                                 </a>
                                                             <?php endif; ?>
                                                         </div>
@@ -143,13 +150,13 @@ include "./views/layout/header.php"
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                    // "buttons": ["copy", "csv",   "excel", "pdf", "print", "colvis"]
+                });
 
                 $('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
-                    "searching": false,
+                    // "searching": false,
                     "ordering": true,
                     "info": true,
                     "autoWidth": false,
