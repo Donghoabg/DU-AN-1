@@ -1,24 +1,37 @@
 <?php
 class AdminDanhMuc
 {
-     public $conn;
 
-     public function __construct()
-     {
-          $this->conn = connectDB();
-     }
-     public function getAllDanhMuc()
-     {
-          try {
-               $sql = "SELECT * FROM danh_mucs WHERE trang_thai = 1 ORDER BY id DESC";
-               $stmt = $this->conn->prepare($sql);
-               $stmt->execute();
 
-               return $stmt->fetchAll();
-          } catch (Exception $e) {
-               echo "Lỗi: " . $e->getMessage();
-          }
-     }
+    public $conn;
+
+    public function __construct()
+    {
+        $this->conn = connectDB();
+    }
+
+    public function getDanhMucBiAn()
+    {
+        try {
+            $sql = "SELECT * FROM danh_mucs WHERE trang_thai = 0 ORDER BY id DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function getAllDanhMuc()
+    {
+        try {
+            $sql = "SELECT * FROM danh_mucs WHERE trang_thai = 1 ORDER BY id DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
 
      public function insertDanhMuc($ten_danh_muc, $mo_ta)
      {
@@ -89,6 +102,18 @@ class AdminDanhMuc
                echo "Lỗi: " . $e->getMessage();
           }
      }
+     public function deleteDanhMuc($id)
+     {
+     try {
+          $sql = "DELETE FROM danh_mucs WHERE id = :id";
+          $stmt = $this->conn->prepare($sql);
+          $stmt->execute([':id' => $id]);
+     } catch (PDOException $e) {
+          echo "Lỗi khi xóa danh mục: " . $e->getMessage();
+     }
+     }
+
+
      public function anDanhMuc($id)
      {
         try {

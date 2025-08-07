@@ -33,6 +33,8 @@ $act = $_GET['act'] ?? '/';
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
+  "danh-muc-bi-an" => (new AdminDanhMucController())->danhSachDanhMucBiAn(),
+  "san-pham-bi-an" => (new AdminSanPhamController())->danhSachSanPhamBiAn(),
   // Trang chủ
   // router danh muc
   '/' => (new AdminBaoCaoThongKeController())->home(),
@@ -44,19 +46,26 @@ match ($act) {
   // "form-xoa-danh-muc" => (new AdminDanhMucController())->deleteDanhMuc(),
   "an-danh-muc" => (new AdminDanhMucController())->anDanhMuc(),
   "hien-danh-muc" => (new AdminDanhMucController())->hienDanhMuc(),
+  "xoa-danh-muc" => (new AdminDanhMucController())->xoaDanhMuc(),
+
+
 
   // router san pham
 
   "san-pham" => (new AdminSanPhamController())->danhSachSanPham(),
   "form-them-san-pham" => (new AdminSanPhamController())->formAddSanPham(),
   "them-san-pham" => (new AdminSanPhamController())->postAddSanPham(),
+    // "form-xoa-san-pham" => (new AdminSanPhamController())->deleteSanpham(),
   "form-sua-san-pham" => (new AdminSanPhamController())->formEditSanPham(),
   "sua-san-pham" => (new AdminSanPhamController())->postEditSanPham(),
-  "form-xoa-san-pham" => (new AdminSanPhamController())->deleteSanPham(),
   "sua-album-anh-san-pham" => (new AdminSanPhamController())->postEditAnhSanPham(),
   "chi-tiet-san-pham" => (new AdminSanPhamController())->detailSanPham(),
   "an-san-pham" => (new AdminSanPhamController())->anSanPham(),
   "hien-san-pham" => (new AdminSanPhamController())->hienSanPham(),
+  "xoa-san-pham" => (new AdminSanPhamController())->xoaSanPham(),
+
+
+
 
   // router don hang
 

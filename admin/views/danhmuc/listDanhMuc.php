@@ -45,8 +45,12 @@ include "./views/layout/header.php"
 
                             <div class="card">
                                 <div class="card-header">
+        
                                     <a href="?act=form-them-danh-muc">
                                         <button class="btn btn-success">Thêm Danh Mục</button>
+                                    </a>
+                                    <a href="?act=danh-muc-bi-an">
+                                        <button class="btn btn-secondary">Danh mục bị ẩn</button>
                                     </a>
                                 </div>
                                 <!-- /.card-header -->
@@ -73,9 +77,12 @@ include "./views/layout/header.php"
                                                         <a href="?act=form-sua-danh-muc&id_danh_muc=<?= $danhmuc['id'] ?>">
                                                             <button class="btn btn-warning">Sửa</button>
                                                         </a>
+                                                        <!-- <a href="?act=xoa-danh-muc&id_danh_muc=<?= $danhmuc['id'] ?>"onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?')">
+                                                                <button class="btn btn-danger">Xóa</button>
+                                                            </a> -->
                                                         <?php if ($danhmuc['trang_thai'] == 1): ?>
                                                             <a href="?act=an-danh-muc&id_danh_muc=<?= $danhmuc['id'] ?>" onclick="return confirm('Bạn có chắc muốn ẩn danh mục này không?')">
-                                                                <button class="btn btn-secondary">Ẩn</button>
+                                                                <button class="btn btn-danger">Ẩn</button>
                                                             </a>
                                                         <?php else: ?>
                                                             <a href="?act=hien-danh-muc&id_danh_muc=<?= $danhmuc['id'] ?>" onclick="return confirm('Bạn có chắc muốn hiện lại danh mục này không?')">
