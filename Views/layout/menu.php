@@ -1,4 +1,15 @@
+  <style>
+    .img{
+        width: 50px;
+        margin-left: 30px;
+    }
+    
+  </style>
   <header class="header-area header-wide">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Pe-icon-7-stroke/1.2.0/css/pe-icon-7-stroke.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
       <div class="main-header d-none d-lg-block">
 
 
@@ -11,13 +22,11 @@
                               <a href="<?= BASE_URL ?>">
                               <div class="logo">
                             <a class="navbar-brand fw-bold" href="<?= BASE_URL ?>" style="cursor:pointer;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" role="img" aria-label="Logo Thời Trang Minh Nhật" style="width:220px; height:auto;">
-                                <circle cx="40" cy="40" r="30" fill="#E60012" />
+                                <img class="img" src="uploads/logo2.png" alt="">                                
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" role="img" aria-label="" style="width:220px; height:auto;">
                                 
-                                <path d="M22 55 L22 25 L30 45 L38 25 L38 55" stroke="#fff" stroke-width="5" fill="none" stroke-linejoin="round"/>
                                 
-                                <!-- Chữ phong cách thư pháp Nhật -->
-                                <text x="80" y="50" font-family="'Brush Script MT', cursive, serif" font-size="28" fill="#222" font-weight="bold" style="letter-spacing: 1.5px;">
+                                <text x="10" y="50"  font-family="'Brush Script MT', cursive, serif" font-size="28" fill="#222" font-weight="bold" style="letter-spacing: 1.5px;">
                                     SENMOOD
                                 </text>
                                 </svg>
@@ -39,12 +48,12 @@
                                               <a href="#">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                               <ul class="dropdown">
                                                   <?php foreach ($listDanhMuc as $danhMuc) { ?>
-                                                      <li><a href="<?= BASE_URL . '?act=san-pham-theo-danh-muc&danh_muc_id=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
+                                                      <li><a href="<?= BASE_URL . '?act=products&category=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
                                                   <?php  } ?>
                                               </ul>
                                           </li>
                                           <li><a href="<?= BASE_URL . '?act=gioi-thieu' ?>">Giới thiệu</a></li>
-                                          <li><a href="<?= BASE_URL . '?act=lien-he' ?>">Liên hệ</a></li>
+                                          <li><a href="<?= BASE_URL . '?act=lien-he' ?>">Thông Tin</a></li>
                                       </ul>
                                   </nav>
 
@@ -53,13 +62,20 @@
                       </div>
                      
                       <div class="col-lg-4">
-                          <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+            
+                            <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                               <div class="header-search-container">
                                   <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                  <form class="header-search-box d-lg-none d-xl-block" action="<?= BASE_URL . '?act=search' ?>" method="POST">
-                                      <input type="text" name="keyword" placeholder="Nhập tên sản phẩm" class="header-search-field">
-                                      <button class="header-search-btn" type="submit"><i class="pe-7s-search"></i></button>
-                                  </form>
+                                  <form method="get" action="" class="">
+                                    <input type="hidden" name="act" value="products">
+                                    <input type="hidden" name="color" value="<?= htmlspecialchars($_GET['color'] ?? '') ?>">
+                                    <input type="hidden" name="size" value="<?= htmlspecialchars($_GET['size'] ?? '') ?>">
+                                    <input type="hidden" name="price" value="<?= htmlspecialchars($_GET['price'] ?? '') ?>">
+                                    <input type="hidden" name="category" value="<?= htmlspecialchars($_GET['category'] ?? '') ?>">
+                                    <input type="hidden" name="sort" value="<?= htmlspecialchars($_GET['sort'] ?? '') ?>">
+                                    <input type="text" name="keyword" class="header-search-field" placeholder="Nhập tên sản phẩm" value="<?= htmlspecialchars($keyword ?? '') ?>">
+                                    <button class="header-search-btn" type="submit"><i class="fas fa-search"></i></button>
+                                </form>
                               </div>
                               <div class="header-configure-area">
 
@@ -74,7 +90,7 @@
                                               ?>
                                                   <img src="<?= $avatar ?>" alt="avatar" style="width:32px;height:32px;border-radius:50%;object-fit:cover;display:inline-block;margin-right:6px;">
                                               <?php } else { ?>
-                                                  <i class="pe-7s-user"></i>
+                                                  <i class="fas fa-user"></i>
                                               <?php } ?>
                                           </a>
                                           <ul class="dropdown-list " style="width: 230px;">
@@ -105,7 +121,7 @@
 
                                       <li>
                                           <a href="<?= BASE_URL .'?act=gio-hang' ?>" class="minicart-btn">
-                                              <i class="pe-7s-shopbag"></i>
+                                              <i class="fas fa-shopping-cart"></i>
                                               <div class="notification">2</div>
                                           </a>
                                       </li>

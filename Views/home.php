@@ -8,7 +8,7 @@
     <section class="slider-area">
         <div class="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="./views/assets/img/slider/6.jpg">
+                <div class="hero-slider-item bg-img" data-bg="./views/assets/img/slider/banner4.png">
                     <div class="container">
                         <div class="row">
 
@@ -19,7 +19,7 @@
             </div>
             
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="./views/assets/img/slider/9.jpeg">
+                <div class="hero-slider-item bg-img" data-bg="./views/assets/img/slider/banner2.png">
                     <div class="container">
                         <div class="row">
 
@@ -30,7 +30,7 @@
             </div>
             
             <div class="hero-single-slide hero-overlay">
-                <div class="hero-slider-item bg-img" data-bg="./views/assets/img/slider/10.jpg">
+                <div class="hero-slider-item bg-img" data-bg="./views/assets/img/slider/banner3.png">
                     <div class="container">
                         <div class="row">
 
