@@ -5,20 +5,21 @@ class ProductController {
     public function __construct() { $this->model = new ProductModel(); }
 
     public function index() {
-    $limit = 6;
+    $limit = 12;
     $page = isset($_GET['page_num']) ? (int)$_GET['page_num'] : 1;
     $offset = ($page - 1) * $limit;
 
     $filters = [
-        'color' => $_GET['color'] ?? '',
-        'size' => $_GET['size'] ?? '',
-        'price_range' => $_GET['price'] ?? '',
-        'danh_muc_id' => $_GET['category'] ?? '',
-        'sort' => $_GET['sort'] ?? '',
-        'keyword' => $_GET['keyword'] ?? '',
-        'limit' => $limit,
-        'offset' => $offset
-    ];
+    'color'        => trim($_GET['color'] ?? ''),
+    'size'         => trim($_GET['size'] ?? ''),
+    'price_range'  => trim($_GET['price'] ?? ''),
+    'danh_muc_id'  => trim($_GET['category'] ?? ''),
+    'sort'         => trim($_GET['sort'] ?? ''),
+    'keyword'      => trim($_GET['keyword'] ?? ''),
+    'limit'        => $limit,
+    'offset'       => $offset
+];
+
 
     $products = $this->model->getFilteredProducts($filters);
     $totalProducts = $this->model->countFilteredProducts($filters); // <== mới, thay vì countAllProducts

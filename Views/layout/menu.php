@@ -62,13 +62,20 @@
                       </div>
                      
                       <div class="col-lg-4">
-                          <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+            
+                            <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                               <div class="header-search-container">
                                   <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                  <form class="header-search-box d-lg-none d-xl-block" action="<?= BASE_URL . '?act=search' ?>" method="POST">
-                                      <input type="text" name="keyword" placeholder="Nhập tên sản phẩm" class="header-search-field">
-                                      <button class="header-search-btn" type="submit"><i class="fas fa-search"></i></button>
-                                  </form>
+                                  <form method="get" action="" class="">
+                                    <input type="hidden" name="act" value="products">
+                                    <input type="hidden" name="color" value="<?= htmlspecialchars($_GET['color'] ?? '') ?>">
+                                    <input type="hidden" name="size" value="<?= htmlspecialchars($_GET['size'] ?? '') ?>">
+                                    <input type="hidden" name="price" value="<?= htmlspecialchars($_GET['price'] ?? '') ?>">
+                                    <input type="hidden" name="category" value="<?= htmlspecialchars($_GET['category'] ?? '') ?>">
+                                    <input type="hidden" name="sort" value="<?= htmlspecialchars($_GET['sort'] ?? '') ?>">
+                                    <input type="text" name="keyword" class="header-search-field" placeholder="Nhập tên sản phẩm" value="<?= htmlspecialchars($keyword ?? '') ?>">
+                                    <button class="header-search-btn" type="submit"><i class="fas fa-search"></i></button>
+                                </form>
                               </div>
                               <div class="header-configure-area">
 
@@ -83,7 +90,7 @@
                                               ?>
                                                   <img src="<?= $avatar ?>" alt="avatar" style="width:32px;height:32px;border-radius:50%;object-fit:cover;display:inline-block;margin-right:6px;">
                                               <?php } else { ?>
-                                                  <i class="pe-7s-user"></i>
+                                                  <i class="fas fa-user"></i>
                                               <?php } ?>
                                           </a>
                                           <ul class="dropdown-list " style="width: 230px;">
