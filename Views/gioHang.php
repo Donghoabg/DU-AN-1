@@ -57,6 +57,7 @@
                                                         <img class="img-fluid" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="<?= $sanPham['ten_san_pham'] ?>">
                                                     </td>
                                                     <td class="pro-title"><?= $sanPham['ten_san_pham'] ?></td>
+                                                    
                                                     <td class="pro-price">
                                                         <span><?= formatPrice($giaSanPham) . ' đ' ?></span>
                                                     </td>
@@ -66,6 +67,15 @@
                                                             <input type="hidden" name="san_pham_id[]" value="<?= $sanPham['san_pham_id'] ?>" >
                                                         </div>
                                                     </td>
+                                                    <?php
+                                                    $size = isset($sanPham['size']) && $sanPham['size'] != '' ? $sanPham['size'] : 'L';
+                                                    $mau_sac = isset($sanPham['mau_sac']) && $sanPham['mau_sac'] != '' ? $sanPham['mau_sac'] : 'xanh';
+                                                    ?>
+
+                                                    <td><?= htmlspecialchars($size) ?></td>
+                                                    <td><?= htmlspecialchars($mau_sac) ?></td>
+
+
                                                     <td class="pro-subtotal">
                                                         <span><?= formatPrice($tongTien) . ' đ' ?></span>
                                                     </td>

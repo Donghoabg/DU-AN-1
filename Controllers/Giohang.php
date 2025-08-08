@@ -40,18 +40,26 @@ class GioHangDonHangController
 
                 $san_pham_id = $_POST['san_pham_id'];
                 $so_luong = $_POST['so_luong'];
+                $size = $_POST['size'] ?? '';
+                $mau_sac = $_POST['mau_sac'] ?? '';
+
 
                 $checkSanPham = false;
                 foreach ($chiTietGioHang as $detail) {
-                    if ($detail['san_pham_id'] == $san_pham_id) {
-                        $newSoLuong = $detail['so_luong'] + $so_luong;
-                        $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $newSoLuong);
-                        $checkSanPham = true;
-                        break;
-                    }
+                if (
+                    $detail['san_pham_id'] == $san_pham_id &&
+                    $detail['size'] == $size &&
+                    $detail['mau_sac'] == $mau_sac
+                ) {
+                    $newSoLuong = $detail['so_luong'] + $so_luong;
+                    $this->modelGioHang->updateSoLuongTheoBienThe($gioHang['id'], $san_pham_id, $size, $mau_sac, $newSoLuong);
+                    $checkSanPham = true;
+                    break;
                 }
+                }
+
                 if (!$checkSanPham) {
-                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong);
+                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong, $size, $mau_sac);
                 }
                 header('Location:' . BASE_URL . '?act=gio-hang');
             } else {
