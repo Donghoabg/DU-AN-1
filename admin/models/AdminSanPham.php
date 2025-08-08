@@ -17,7 +17,7 @@ class AdminSanPham
         try {
             $sql =
             "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams
-            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id ORDER BY san_phams.id DESC";
+            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id WHERE san_phams.is_hidden = 0 ORDER BY san_phams.id DESC";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 
@@ -34,6 +34,24 @@ class AdminSanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
+
+    public function getSanPhamBiAn()
+    {
+        try {
+            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id WHERE san_phams.is_hidden = 1 ORDER BY san_phams.id DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $products = $stmt->fetchAll();
+            foreach ($products as &$product) {
+                $product['gia_san_pham'] = $this->convertToVND($product['gia_san_pham']);
+                $product['gia_khuyen_mai'] = $this->convertToVND($product['gia_khuyen_mai']);
+            }
+            return $products;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    // Đoạn mã thừa đã bị xóa, các hàm phía dưới giữ nguyên
     
 
 
@@ -368,7 +386,7 @@ class AdminSanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    // Models/SanPhamModel.php
+ // Models/SanPhamModel.php
     public function insertBienThe($san_pham_id, $mau, $size)
     {
         $sql = "INSERT INTO san_pham_bien_the (san_pham_id, mau, size) VALUES (?, ?, ?)";
@@ -376,5 +394,17 @@ class AdminSanPham
         $stmt->execute([$san_pham_id, $mau, $size]);
     }
     
+
+=======
+    public function deleteSanPham($id)
+{
+    try {
+        $sql = "DELETE FROM san_phams WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':id' => $id]);
+    } catch (PDOException $e) {
+        echo "Lỗi xóa sản phẩm: " . $e->getMessage();
+    }
+}
 
 }

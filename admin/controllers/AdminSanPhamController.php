@@ -1,10 +1,14 @@
 <?php
-class AdminSanPhamController
-{
+class AdminSanPhamController {
+
     public $modelDonHang;
     public $modelSanPham;
     public $modelDanhMuc;
-    
+    public function danhSachSanPhamBiAn()
+    {
+        $listSanPhamBiAn = $this->modelSanPham->getSanPhamBiAn();
+        require_once "./views/sanpham/listSanPhamBiAn.php";
+    }
     public function __construct()
     {
         $this->modelSanPham = new AdminSanPham();
@@ -302,20 +306,24 @@ class AdminSanPhamController
             exit();
         }
     }
-
-    public function deleteSanPham()
+    public function xoaSanPham()
     {
-        $id = $_GET['id_san_pham'];
-        $sanPham = $this->modelSanPham->getDetailSanPham($id);
-        $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
-        if ($sanPham) {
-            $this->modelSanPham->hideSanPham($id); // Chuyển sang ẩn sản phẩm
-            // Không xoá file hình ảnh nữa để giữ dữ liệu
+        if (isset($_GET['id_san_pham'])) {
+            $id = $_GET['id_san_pham'];
+
+            // Gọi model để xóa sản phẩm
+            $this->modelSanPham->deleteSanPham($id);
+
+            // Sau khi xóa quay về danh sách sản phẩm
+            header("Location: " . BASE_URL_ADMIN . "?act=san-pham");
+            exit();
+        } else {
+            // Nếu không có id thì quay lại danh sách
+            header("Location: " . BASE_URL_ADMIN . "?act=san-pham");
+            exit();
         }
-        // Không xoá ảnh sản phẩm nữa
-        header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
-        exit();
     }
+
     public function detailSanPham()
     {
         // hiển thị form nhập

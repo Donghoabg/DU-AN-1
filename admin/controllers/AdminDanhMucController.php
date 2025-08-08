@@ -1,7 +1,13 @@
 <?php
 class AdminDanhMucController
-{
+{ 
      public $modelDanhMuc; // Biến lưu model danh mục
+      // Hiển thị danh mục bị ẩn
+    public function danhSachDanhMucBiAn()
+    {
+        $listDanhMucBiAn = $this->modelDanhMuc->getDanhMucBiAn();
+        require_once "./views/danhmuc/listDanhMucBiAn.php";
+    }
 
      // Hàm khởi tạo controller, khởi tạo model danh mục
      public function __construct()
@@ -12,7 +18,7 @@ class AdminDanhMucController
      // Hiển thị danh sách danh mục
      public function danhSachDanhMuc()
      {
-          $listDanhMuc = $this->modelDanhMuc->getAllDanhMucAdmin(); // Lấy toàn bộ danh mục
+          $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc(); // Chỉ lấy danh mục đang hiện
           require_once "./views/danhmuc/listDanhMuc.php"; // Hiển thị view danh sách danh mục
      }
 
@@ -20,7 +26,7 @@ class AdminDanhMucController
      public function formAddDanhMuc()
      {
           require_once "./views/danhmuc/addDanhMuc.php"; // Hiển thị form nhập danh mục
-          deleteSessionError(); // Xóa lỗi session nếu có
+          // deleteSessionError(); // Xóa lỗi session nếu có
      }
 
      // Xử lý thêm danh mục mới
@@ -104,6 +110,22 @@ class AdminDanhMucController
         header('location: ' . BASE_URL_ADMIN . '?act=danh-muc-mi-pham'); // Chuyển hướng về danh sách
         exit();
     }
+     public function xoaDanhMuc()
+     {
+     if (isset($_GET['id_danh_muc'])) {
+          $id = $_GET['id_danh_muc'];
+
+          // Gọi model để xóa danh mục
+          $this->modelDanhMuc->deleteDanhMuc($id);
+
+          // Quay lại trang danh sách danh mục
+          header("Location: " . BASE_URL_ADMIN . "?act=danh-muc-mi-pham");
+          exit();
+     } else {
+          header("Location: " . BASE_URL_ADMIN . "?act=danh-muc-mi-pham");
+          exit();
+     }
+}
 
     // Hiện danh mục
     public function hienDanhMuc() {
