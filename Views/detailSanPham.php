@@ -162,7 +162,7 @@
     .related-item {width:250px; height: 420px; text-align:center;border:1px solid #eee;overflow:hidden;transition:transform 0.3s;}
     .related-item:hover{transform:translateY(-5px);}
     .related-item img{width:100%;height:auto;}
-    .related-item h4{font-size:16px;margin:10px 0; margin-top: 20px;}
+    .related-item h4{font-size:16px;margin:10px 0; margin-top: 20px     ;}
     .related-item .price{color:#e53935;font-weight:bold;}
     .size-list button.active {
     border-color: #000;
