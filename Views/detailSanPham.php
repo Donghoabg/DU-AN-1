@@ -1,476 +1,151 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
 <style>
-    .pro-large-img {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 400px;
-    }
+/* =================== GIAO DIỆN CHUNG =================== */
+body {font-family: Arial,sans-serif;color:#333;}
+.container-detail {max-width:1310px;margin:40px auto;display:flex;gap:50px;flex-wrap:wrap;}
+.breadcrumb {font-size:14px;color:#888;margin-bottom:20px;}
+.breadcrumb a {color:#555;text-decoration:none;}
+.breadcrumb a:hover {text-decoration:underline;}
 
-    .pro-large-img img {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.3s ease-in-out;
-    }
+/* =================== HÌNH ẢNH SẢN PHẨM =================== */
+.detail-left {flex:1 1 45%;position:relative;}
+.main-image-wrapper {width:100%;border:1px solid #eee;overflow:hidden;border-radius:8px;}
+.main-image-wrapper img {width:100%;transition:transform 0.3s ease-in-out;}
+.main-image-wrapper:hover img {transform:scale(1.5);cursor:zoom-in;}
+.thumb-list {margin-top:15px;display:flex;flex-direction:column;gap:10px;}
+.thumb-item img {width:80px;height:80px;border:1px solid #ddd;border-radius:4px;cursor:pointer;transition:all 0.2s;}
+.thumb-item img:hover {border-color:#000;}
 
-    .pro-large-img:hover img {
-        transform: scale(1.5);
-        /* Phóng to ảnh khi hover */
-        cursor: zoom-in;
-    }
+/* =================== THÔNG TIN SẢN PHẨM =================== */
+.detail-right {flex:1 1 50%;}
+.product-name {font-size:26px;font-weight:bold;margin-bottom:15px;}
+.product-price {font-size:22px;font-weight:bold;color:#e53935;margin-bottom:10px;}
+.product-old-price {font-size:18px;color:#999;text-decoration:line-through;margin-left:10px;}
+.availability {font-size:15px;color:#28a745;margin-bottom:15px;}
+.product-desc {font-size:16px;line-height:1.5;margin-bottom:25px;}
+.option-title {font-weight:600;font-size:15px;margin-right:10px;}
+.size-list button {border:1px solid #ddd;padding:6px 12px;margin-right:8px;background:#fff;cursor:pointer;border-radius:4px;}
+.size-list button.active {border-color:#000;background:#000;color:#fff;}
+.quantity-box {display:flex;align-items:center;margin:20px 0;}
+.quantity-box input[type="number"] {width:60px;height:38px;text-align:center;border:1px solid #ccc;border-radius:4px;margin:0 10px;}
+.btn-buy,.btn-cart {background:#000;color:#fff;border:none;padding:12px 28px;font-size:15px;cursor:pointer;border-radius:6px;transition:0.3s;margin-right:15px;}
+.btn-buy:hover,.btn-cart:hover {background:#333;}
 
-    .so-luong-error {
-        display: none;
-        background: #fff0f0;
-        color: #d8000c;
-        border: 1px solid #f5c6cb;
-        border-radius: 6px;
-        padding: 8px 12px;
-        margin-top: 6px;
-        font-size: 15px;
-        font-weight: 500;
-        box-shadow: 0 2px 8px rgba(220,53,69,0.07);
-        position: relative;
-        animation: fadeIn 0.4s;
-    }
-    .so-luong-error::before {
-        content: '\26A0'; /* icon cảnh báo */
-        margin-right: 8px;
-        font-size: 18px;
-        vertical-align: middle;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-8px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+/* =================== BÌNH LUẬN =================== */
+.review-section {margin-top:50px;}
+.review-section h3 {font-size:22px;margin-bottom:20px;}
+.review-item {border-bottom:1px solid #eee;padding:15px 0;}
+.review-item:last-child{border-bottom:none;}
+.review-item .avatar {width:40px;height:40px;border-radius:50%;margin-right:10px;}
+.review-item .info {display:flex;align-items:center;margin-bottom:5px;}
+.review-item .info strong{margin-right:10px;}
+.review-form textarea {width:100%;border:1px solid #ccc;border-radius:6px;padding:10px;resize:none;}
+.review-form button {margin-top:10px;}
 
-    /* Thêm CSS cho popup thông báo lỗi số lượng */
-    .so-luong-popup-overlay {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.25);
-        z-index: 9998;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .so-luong-popup {
-        position: fixed;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(220,53,69,0.18);
-        border: 1.5px solid #f5c6cb;
-        z-index: 9999;
-        min-width: 320px;
-        max-width: 90vw;
-        padding: 28px 28px 18px 28px;
-        text-align: center;
-        animation: fadeIn 0.3s;
-    }
-    .so-luong-popup-content {
-        color: #d8000c;
-        font-size: 17px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-    .so-luong-popup-content::before {
-        content: '\26A0';
-        font-size: 22px;
-        margin-right: 6px;
-    }
-    .so-luong-popup-close {
-        position: absolute;
-        top: 8px; right: 12px;
-        background: none;
-        border: none;
-        font-size: 22px;
-        color: #d8000c;
-        cursor: pointer;
-        font-weight: bold;
-        transition: color 0.2s;
-    }
-    .so-luong-popup-close:hover {
-        color: #a30000;
-    }
+/* =================== SẢN PHẨM LIÊN QUAN =================== */
+.related-products {margin-top:60px;}
+.related-products h3 {font-size:24px;margin-bottom:20px;text-align:center;}
+.related-list {display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.related-item {width:200px;text-align:center;border:1px solid #eee;border-radius:8px;overflow:hidden;transition:transform 0.3s;}
+.related-item:hover{transform:translateY(-5px);}
+.related-item img{width:100%;height:auto;}
+.related-item h4{font-size:16px;margin:10px 0;}
+.related-item .price{color:#e53935;font-weight:bold;}
 </style>
 
-<main>
-    <!-- breadcrumb area start -->
-    <div class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-wrap">
-                        <nav aria-label="breadcrumb">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="<?= BASE_URL . '?act=' ?>">Sản Phẩm</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+<div class="container-detail">
+    <div class="detail-left">
+        <div class="main-image-wrapper">
+            <img src="<?= BASE_URL . $listAnhSanPham[0]['link_hinh_anh'] ?>" alt="product-main">
+        </div>
+        <div class="thumb-list">
+            <?php foreach ($listAnhSanPham as $anh): ?>
+            <div class="thumb-item">
+                <img src="<?= BASE_URL . $anh['link_hinh_anh'] ?>" onclick="document.querySelector('.main-image-wrapper img').src=this.src;">
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
-    <!-- breadcrumb area end -->
-
-    <!-- page main wrapper start -->
-    <div class="shop-main-wrapper section-padding pb-0">
-        <div class="container">
-            <div class="row">
-                <!-- product details wrapper start -->
-                <div class="col-lg-12 order-1 order-lg-2">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <?php foreach ($listAnhSanPham as $key => $anhSanPham) { ?>
-                                        <div class="pro-large-img">
-                                                <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>"alt="product-details" />
-                                        </div>
-                                    <?php } ?>
-
-
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <?php foreach ($listAnhSanPham as $key => $anhSanPham) { ?>
-
-                                        <div class="pro-nav-thumb">
-                                        <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>"alt="product-details"
-                                                style='width:75px; height: 75px;' />
-                                        </div>
-                                    <?php } ?>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="#"><?= $sanPham['ten_danh_muc'] ?></a>
-                                    </div>
-                                    <h3 class="product-name"><?= $sanPham['ten_san_pham'] ?></h3>
-                                    <div class="ratings d-flex">
-                                        <div class="pro-review">
-                                            <?php $countComment = count($listBinhLuan); ?>
-                                            <span><?= $countComment . ' Bình luận' ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <?php if ($sanPham['gia_khuyen_mai'] > 0) { ?>
-                                            <span
-                                                class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; ?></span>
-                                            <span
-                                                class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
-                                        <?php } else { ?>
-                                            <span
-                                                class="price-regular"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
-                                        <?php }    ?>
-
-                                    </div>
-
-                                    <!-- check số lượng sản phẩm  -->
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span><?= $sanPham['so_luong'] . ' sản phẩm' ?></span>
-                                    </div>
-
-                                    <p class="pro-desc"><?= $sanPham['mo_ta'] ?></p>
-                                    <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST" onsubmit="return themVaoGioHangAjax(this, event)">
-                                        <div class="quantity-cart-box d-flex align-items-center">
-                                            <h6 class="option-title">Số lượng:</h6>
-                                            <div class="quantity">
-                                                <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-                                                <div class="pro-qty">
-                                                    <input type="number" value="1" name="so_luong" min="1" max="<?= $sanPham['so_luong'] ?>">
-                                                    <div id="soLuongMsg" class="so-luong-error" style="display: none;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="action_link">
-                                                <button class="btn btn-cart2" type="submit">Thêm vào giỏ hàng</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <script>
-                                    function themVaoGioHangAjax(form, event) {
-                                        event.preventDefault();
-                                        var formData = new FormData(form);
-                                        fetch('<?= BASE_URL . '?act=them-gio-hang' ?>', {
-                                            method: 'POST',
-                                            body: formData
-                                        })
-                                        .then(response => response.text())
-                                        .then(data => {
-                                            alert('Đã thêm vào giỏ hàng!');
-                                        })
-                                        .catch(error => {
-                                            alert('Có lỗi xảy ra!');
-                                        });
-                                        return false;
-                                    }
-                                    </script>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- product details inner end -->
-
-                    <!-- product details reviews start -->
-                    <div class="product-details-reviews section-padding pb-0">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="product-review-info">
-                                    <ul class="nav review-tab">
-
-                                        <li>
-                                            <a class="active" data-bs-toggle="tab" href="#tab_three">Bình luận
-                                                (<?= $countComment ?>)</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content reviews-tab">
-
-                                        <div class="tab-pane fade show active" id="tab_three">
-
-                                            <div class="tab-content reviews-tab">
-                                                <div class="tab-pane fade show active" id="tab_three">
-
-                                                    <!-- Hiển thị danh sách bình luận -->
-                                                    <?php foreach ($listBinhLuan as $binhLuan): ?>
-                                                        <div class="total-reviews d-flex align-items-start mb-3">
-                                                            <div class="rev-avatar me-3">
-                                                                <img src="<?= htmlspecialchars($binhLuan['anh_dai_dien']) ?>" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;">
-                                                            </div>
-                                                            <div class="review-box w-100">
-                                                                <div class="post-author mb-2">
-                                                                    <p class="mb-1">
-                                                                        <strong><?= htmlspecialchars($binhLuan['ho_ten']) ?></strong>
-                                                                        <small class="text-muted ms-2"><?= htmlspecialchars($binhLuan['ngay_dang']) ?></small>
-                                                                    </p>
-                                                                </div>
-                                                                <p class="mb-2"><?= htmlspecialchars($binhLuan['noi_dung']) ?></p>
-                                                                <!-- Nút "Thu Hồi Bình Luận" căn phải -->
-                                                                <div class="text-end">
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php endforeach; ?>
-
-                                                    <!-- Form gửi bình luận -->
-                                                    <form action="<?= BASE_URL . '?act=gui-binh-luan' ?>" method="POST" class="review-form">
-                                                        <!-- Gửi ID sản phẩm qua form -->
-                                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-
-                                                        <!-- Kiểm tra nếu người dùng chưa đăng nhập -->
-                                                        <?php if (!isset($_SESSION['user_client'])): ?>
-                                                            <p class="text-danger">Vui lòng <a href="<?= BASE_URL . '?act=login' ?>">đăng nhập</a> để gửi bình luận.</p>
-                                                        <?php else: ?>
-                                                            <!-- Gửi ID tài khoản người dùng qua form -->
-                                                            <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['user_client'] ?>">
-
-                                                            <div class="form-group row">
-                                                                <div class="col">
-                                                                    <label for="binh_luan" class="col-form-label">
-                                                                        <span class="text-danger">*</span> Nội Dung Bình Luận
-                                                                    </label>
-                                                                    <textarea name="binh_luan" class="form-control" id="binh_luan" rows="3" required></textarea>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group mt-3">
-                                                                <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- product details reviews end -->
-                </div>
-                <!-- product details wrapper end -->
-            </div>
+    <div class="detail-right">
+        <nav class="breadcrumb">
+            <a href="<?= BASE_URL ?>"><i class="fa fa-home"></i> Trang chủ</a> / 
+            <a href="<?= BASE_URL . '?act=' ?>">Sản phẩm</a> / 
+            <span><?= htmlspecialchars($sanPham['ten_san_pham']) ?></span>
+        </nav>
+        <h1 class="product-name"><?= htmlspecialchars($sanPham['ten_san_pham']) ?></h1>
+        <div class="product-price">
+            <?= formatPrice($sanPham['gia_khuyen_mai'] ?: $sanPham['gia_san_pham']) ?>đ
+            <?php if($sanPham['gia_khuyen_mai']){ ?>
+                <span class="product-old-price"><?= formatPrice($sanPham['gia_san_pham']) ?>đ</span>
+            <?php } ?>
         </div>
+        <div class="availability">Còn hàng: <?= htmlspecialchars($sanPham['so_luong']) ?> sản phẩm</div>
+        <div class="product-desc"><?= htmlspecialchars($sanPham['mo_ta']) ?></div>
+
+        <form onsubmit="return themVaoGioHangAjax(this, event)">
+            <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+            <div class="quantity-box">
+                <span class="option-title">Số lượng:</span>
+                <input type="number" name="so_luong" value="1" min="1" max="<?= $sanPham['so_luong'] ?>">
+            </div>
+            <button type="submit" class="btn-cart">Thêm vào giỏ hàng</button>
+            <a href="<?= BASE_URL . '?act=thanh-toan' ?>" class="btn-buy">Mua ngay</a>
+        </form>
     </div>
-    <!-- page main wrapper end -->
-
-    <!-- related products area start -->
-    <section class="related-products section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- section title start -->
-                    <div class="section-title text-center">
-                        <h2 class="title">Sản phẩm liên quan</h2>
-                        <p class="sub-title"></p>
-                    </div>
-                    <!-- section title start -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-                        <!-- product item start -->
-                        <?php foreach ($listSanPhamCungDanhMuc as $key => $sanPham): ?>
-                            <!-- product item start -->
-                            <div class="product-item">
-                                <figure class="product-thumb">
-                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
-                                        <img class="pri-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
-                                        <img class="sec-img" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product">
-                                    </a>
-                                    <div class="product-badge">
-                                        <?php
-                                        $ngayNhap = formatDate($sanPham['ngay_nhap']);
-                                        $ngayHienTai = new DateTime();
-                                        $tinhNgay = $ngayHienTai->diff(new DateTime($sanPham['ngay_nhap']));
-                                        if ($tinhNgay->days <= 7) {
-                                        ?>
-                                            <div class="product-label new">
-                                                <span>Mới </span>
-                                            </div>
-                                        <?php } ?>
-
-                                        <?php
-                                        if ($sanPham['gia_khuyen_mai'])
-                                        ?>
-
-                                        <div class="product-label discount">
-                                            <span>Giảm giá</span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="cart-hover">
-                                        <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
-                                            <div class="cart-hover"><button class="btn btn-cart">Xem chi tiết</button>
-                                        </a>
-                                    </div>
-                                </figure>
-                                <div class="product-caption text-center">
-
-                                    <h6 class="product-name">
-                                        <a
-                                            href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
-                                    </h6>
-                                    <div class="price-box">
-                                        <?php if ($sanPham['gia_khuyen_mai']) { ?>
-
-                                            <span
-                                                class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; ?></span>
-                                            <span
-                                                class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
-                                        <?php } else {  ?>
-                                            <span
-                                                class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
-                                        <?php } ?>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- product item end -->
-
-                        <?php endforeach  ?>
-                        <!-- product item end -->
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- related products area end -->
-</main>
-
-<!-- Popup thông báo lỗi số lượng -->
-<div id="soLuongPopupOverlay" class="so-luong-popup-overlay" style="display:none;"></div>
-<div id="soLuongPopup" class="so-luong-popup" style="display:none;">
-    <button type="button" class="so-luong-popup-close" id="closeSoLuongPopup">&times;</button>
-    <div class="so-luong-popup-content" id="soLuongPopupMsg"></div>
 </div>
 
-<!-- Thêm jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="container-detail review-section">
+    <h3>Bình luận (<?= count($listBinhLuan) ?>)</h3>
+    <?php foreach($listBinhLuan as $bl): ?>
+    <div class="review-item d-flex">
+        <img src="<?= htmlspecialchars($bl['anh_dai_dien']) ?>" class="avatar" alt="avatar">
+        <div>
+            <div class="info">
+                <strong><?= htmlspecialchars($bl['ho_ten']) ?></strong>
+                <small><?= htmlspecialchars($bl['ngay_dang']) ?></small>
+            </div>
+            <p><?= htmlspecialchars($bl['noi_dung']) ?></p>
+        </div>
+    </div>
+    <?php endforeach; ?>
 
-<!-- Thêm ElevateZoom -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.zoomImg').elevateZoom({
-            zoomType: "inner", // Zoom bên trong ảnh
-            cursor: "crosshair", // Dùng con trỏ hình chữ thập
-            zoomWindowFadeIn: 500, // Hiệu ứng mờ dần khi mở zoom
-            zoomWindowFadeOut: 500 // Hiệu ứng mờ dần khi đóng zoom
-        });
-    });
-</script>
-<script>
-    document.querySelectorAll('.pro-large-img').forEach(function(imgContainer) {
-        imgContainer.addEventListener('mousemove', function(e) {
-            const img = imgContainer.querySelector('img');
-            const rect = imgContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left; // Vị trí X chuột
-            const y = e.clientY - rect.top; // Vị trí Y chuột
-            img.style.transformOrigin = `${x}px ${y}px`; // Tùy chỉnh điểm zoom
-            img.style.transform = 'scale(1.5)';
-        });
+    <?php if(isset($_SESSION['user_client'])): ?>
+    <form action="<?= BASE_URL . '?act=gui-binh-luan' ?>" method="POST" class="review-form">
+        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+        <textarea name="binh_luan" rows="4" required placeholder="Nhập bình luận của bạn..."></textarea>
+        <button type="submit" class="btn-cart">Gửi bình luận</button>
+    </form>
+    <?php else: ?>
+        <p>Vui lòng <a href="<?= BASE_URL . '?act=login' ?>">đăng nhập</a> để gửi bình luận.</p>
+    <?php endif; ?>
+</div>
 
-        imgContainer.addEventListener('mouseleave', function() {
-            const img = imgContainer.querySelector('img');
-            img.style.transformOrigin = 'center center';
-            img.style.transform = 'scale(1)';
-        });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        var soLuongInput = document.querySelector('input[name="so_luong"]');
-        // Ẩn thông báo cũ
-        var msg = document.getElementById('soLuongMsg');
-        if(msg) msg.style.display = 'none';
-        // Popup
-        var popup = document.getElementById('soLuongPopup');
-        var popupMsg = document.getElementById('soLuongPopupMsg');
-        var popupOverlay = document.getElementById('soLuongPopupOverlay');
-        var closeBtn = document.getElementById('closeSoLuongPopup');
-        var maxQty = parseInt(soLuongInput.getAttribute('max'));
-        function showSoLuongPopup(message) {
-            popupMsg.textContent = message;
-            popup.style.display = 'block';
-            popupOverlay.style.display = 'flex';
-        }
-        function hideSoLuongPopup() {
-            popup.style.display = 'none';
-            popupOverlay.style.display = 'none';
-        }
-        closeBtn.onclick = hideSoLuongPopup;
-        popupOverlay.onclick = hideSoLuongPopup;
-        soLuongInput.addEventListener('input', function() {
-            if (parseInt(this.value) > maxQty) {
-                showSoLuongPopup('Hiện tại bên shop không đủ sản phẩm (' + maxQty + ' sản phẩm còn lại)');
-                this.value = maxQty;
-            } else if (parseInt(this.value) < 1) {
-                showSoLuongPopup('Số lượng tối thiểu là 1');
-                this.value = 1;
-            }
-        });
-    });
+<div class="container-detail related-products">
+    <h3>Sản phẩm liên quan</h3>
+    <div class="related-list">
+        <?php foreach($listSanPhamCungDanhMuc as $sp): ?>
+        <div class="related-item">
+            <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sp['id'] ?>">
+                <img src="<?= BASE_URL . $sp['hinh_anh'] ?>" alt="related">
+                <h4><?= htmlspecialchars($sp['ten_san_pham']) ?></h4>
+                <div class="price"><?= formatPrice($sp['gia_khuyen_mai'] ?: $sp['gia_san_pham']) ?>đ</div>
+            </a>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<script>
+function themVaoGioHangAjax(form, event){
+    event.preventDefault();
+    let formData=new FormData(form);
+    fetch('<?= BASE_URL . '?act=them-gio-hang' ?>',{method:'POST',body:formData})
+    .then(res=>res.text())
+    .then(data=>alert('Đã thêm vào giỏ hàng!'))
+    .catch(()=>alert('Có lỗi xảy ra!'));
+    return false;
+}
 </script>
 
-<!-- offcanvas mini cart start -->
-<?php require_once 'layout/miniCart.php'; ?>
 <?php require_once 'layout/footer.php'; ?>

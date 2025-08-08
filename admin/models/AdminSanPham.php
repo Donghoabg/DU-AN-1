@@ -368,4 +368,12 @@ class AdminSanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    // Models/SanPhamModel.php
+    public function insertBienThe($san_pham_id, $mau, $size)
+    {
+        $sql = "INSERT INTO san_pham_bien_the (san_pham_id, mau, size) VALUES (?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$san_pham_id, $mau, $size]);
+    }
+
 }
