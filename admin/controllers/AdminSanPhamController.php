@@ -418,4 +418,6 @@ class AdminSanPhamController
         header('location: ' . BASE_URL_ADMIN . '?act=san-pham'); // Chuyển hướng về trang danh sách sản phẩm
         exit(); // Kết thúc hàm
     }
+    
+
 }

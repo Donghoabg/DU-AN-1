@@ -200,5 +200,14 @@ class SanPham
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function getBienTheBySanPhamId($id)
+{
+    $sql = "SELECT * FROM san_pham_bien_the WHERE san_pham_id = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['id' => $id]); // ✅ đúng cú pháp: truyền đúng key 'id'
+    return $stmt->fetchAll();
+}
+
+
     
 }

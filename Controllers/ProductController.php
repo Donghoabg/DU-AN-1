@@ -24,6 +24,8 @@ class ProductController {
     $products = $this->model->getFilteredProducts($filters);
     $totalProducts = $this->model->countFilteredProducts($filters); // <== mới, thay vì countAllProducts
     $totalPages = ceil($totalProducts / $limit);
+    
+
 
     $categories = $this->model->getAllCategories();
     $listDanhMuc = $categories;

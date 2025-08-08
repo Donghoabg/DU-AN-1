@@ -219,4 +219,5 @@ public function countFilteredProducts($filters) {
     return $stmt->fetchColumn();
 }
 
+
 }

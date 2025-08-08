@@ -375,5 +375,6 @@ class AdminSanPham
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$san_pham_id, $mau, $size]);
     }
+    
 
 }
