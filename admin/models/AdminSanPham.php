@@ -395,7 +395,7 @@ class AdminSanPham
     }
     
 
-=======
+
     public function deleteSanPham($id)
 {
     try {

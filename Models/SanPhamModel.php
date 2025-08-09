@@ -27,7 +27,7 @@ class SanPhamModel {
 
         if (!empty($filter['gia'])) {
             switch ($filter['gia']) {
-                case '1': $sql .= " AND gia_san_pham > 100000"; break;
+                case '1': $sql .= " AND gia_san_pham < 100000"; break;
                 case '2': $sql .= " AND gia_san_pham BETWEEN 200000 AND 500000"; break;
                 case '3': $sql .= " AND gia_san_pham BETWEEN 500000 AND 1000000"; break;
                 case '4': $sql .= " AND gia_san_pham > 1000000"; break;
