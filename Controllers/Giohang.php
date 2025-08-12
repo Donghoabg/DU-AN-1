@@ -99,41 +99,58 @@ class GioHangDonHangController
             header('Location:' . BASE_URL . '?act=login');
         }
     }
-    public function capNhatGioHang()
+   public function capNhatGioHang()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_SESSION['user_client'])) {
+            // Lấy thông tin tài khoản từ email đã đăng nhập
             $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
 
             $san_pham_ids = $_POST['san_pham_id'];
-            $sizes = $_POST['size'];
-            $mau_sacs = $_POST['mau_sac'];
-            $id_chi_tiet_gio_hangs = $_POST['id_chi_tiet_gio_hang'];
+            $sizes = isset($_POST['size']) ? $_POST['size'] : [];
+            $mau_sacs = isset($_POST['mau_sac']) ? $_POST['mau_sac'] : [];
+            $id_chi_tiet_gio_hangs = isset($_POST['id_chi_tiet_gio_hang']) ? $_POST['id_chi_tiet_gio_hang'] : [];
             $so_luongs = $_POST['so_luong'];
 
-            foreach ($so_luongs as $index => $so_luong) {
-                if ($so_luong > 0) {
-                    $san_pham_id = $san_pham_ids[$index];
-                    $size = $sizes[$index];
-                    $mau_sac = $mau_sacs[$index];
-                    $id_chi_tiet_gio_hang = $id_chi_tiet_gio_hangs[$index];
+            // Danh sách sản phẩm được chọn để xóa (checkbox)
+            $xoa_ids = isset($_POST['xoa']) ? $_POST['xoa'] : [];
 
-                    // Cập nhật số lượng theo biến thể
-                    $this->modelGioHang->updateSoLuongTheoBienThe($gioHang['id'], $san_pham_id, $size, $mau_sac, $so_luong);
+            foreach ($san_pham_ids as $index => $san_pham_id) {
+                // Kiểm tra có xóa không
+                if (in_array($san_pham_id, $xoa_ids)) {
+                    // Xóa sản phẩm khỏi chi tiết giỏ hàng
+                    $this->modelGioHang->deleteChiTietGioHangTheoSP($gioHang['id'], $san_pham_id);
+                } else {
+                    $so_luong = $so_luongs[$index];
 
-                    // Hoặc nếu có hàm update theo id chi tiết thì dùng:
-                    // $this->modelGioHang->updateSoLuongByIdChiTietGioHang($id_chi_tiet_gio_hang, $so_luong);
+                    if ($so_luong > 0) {
+                        // Nếu có size, màu thì cập nhật theo biến thể
+                        if (!empty($sizes) && !empty($mau_sacs)) {
+                            $size = $sizes[$index];
+                            $mau_sac = $mau_sacs[$index];
+                            $this->modelGioHang->updateSoLuongTheoBienThe($gioHang['id'], $san_pham_id, $size, $mau_sac, $so_luong);
+                        } else {
+                            // Ngược lại cập nhật theo sản phẩm (không phân biến thể)
+                            $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $so_luong);
+                        }
+                    }
                 }
             }
+
             header('Location:' . BASE_URL . '?act=gio-hang');
             exit;
         } else {
+            // Chưa đăng nhập thì chuyển tới trang login
             header('Location:' . BASE_URL . '?act=login');
             exit;
         }
     }
-    }
+}
+
+
+
+
 
 
     public function daDatHang()
@@ -266,7 +283,7 @@ class GioHangDonHangController
                     $_SESSION['flash'] = true;
                     $_SESSION['dat_hang_thanh_cong'] = 'Đã đặt hàng thành công! Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi';
                     $subject = 'Shop NBH ';
-                    $content = "'Xin chào '.$ten_nguoi_nhan.'! <br> Đơn hàng của bạn đã được đặt thành công. Chúng tôi sẽ tiếp nhận đơn hàng và giao hàng cho bạn trong thời gian sớm nhất. <br> Mã đơn hàng của bạn là: '.$ma_don_hang.' <br> ";
+                    $content = "'Xin chào $ten_nguoi_nhan   ! <br> Đơn hàng của bạn đã được đặt thành công. Chúng tôi sẽ tiếp nhận đơn hàng và giao hàng cho bạn trong thời gian sớm nhất. <br> Mã đơn hàng của bạn là: $ma_don_hang <br> ";
                     $this->guimail($email_nguoi_nhan, $subject, $content);
                     header('Location:' . BASE_URL . '?act=da-dat-hang');
                     exit();
@@ -308,14 +325,18 @@ class GioHangDonHangController
             echo "Gửi mail thất bại Mailer Error: {$mail->ErrorInfo}";
         }
     }
-public function xoaSp()
-{
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $chi_tiet_gio_hang_id = $_POST['chi_tiet_gio_hang_id'];
-        $xoa = $this->modelGioHang->deleteChiTietGioHang($chi_tiet_gio_hang_id);
-        header('Location:' . BASE_URL . '?act=gio-hang');
+    public function xoaSp()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['selected_items']) && is_array($_POST['selected_items'])) {
+                foreach ($_POST['selected_items'] as $chiTietId) {
+                    $this->modelGioHang->deleteChiTietGioHang($chiTietId);
+                }
+            }
+            header('Location:' . BASE_URL . '?act=gio-hang');
+            exit;
+        }
     }
-}
     public function lichSuDonHang() {
         // Giả sử bạn có model DonHang.php với method lấy đơn hàng theo user
         session_start();
@@ -327,14 +348,14 @@ public function xoaSp()
         }
 
         // Gọi model để lấy danh sách đơn hàng
-        $userId = ['user_id'];
+        $userId = $_SESSION['user_id'];
         $donHangModel = new DonHang();
-        $orders = $this->$donHangModel->getOrdersByUser($userId);
+        $orders = $donHangModel->getOrdersByUser($userId);
 
         // Truyền dữ liệu sang view
         require_once './views/lich-su-don-hang.php';
     }
-public function xoaSanPhamGioHang() {
+    public function xoaSanPhamGioHang() {
         if (isset($_SESSION['user_client']) && isset($_GET['id_chi_tiet_gio_hang'])) {
             $chi_tiet_gio_hang_id = $_GET['id_chi_tiet_gio_hang'];
             $this->modelGioHang->deleteChiTietGioHang($chi_tiet_gio_hang_id);
