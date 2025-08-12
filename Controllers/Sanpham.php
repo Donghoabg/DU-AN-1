@@ -24,6 +24,7 @@ class SanPhamController
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
         $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamdDanhMuc($sanPham['id'], $sanPham['danh_muc_id']);
+        $listBienThe = $this->modelSanPham->getBienTheBySanPhamId($_GET['id_san_pham']); // thêm dòng này
         // var_dump($listSanPhamCungDanhMuc);die();
 
         if (isset($sanPham)) {

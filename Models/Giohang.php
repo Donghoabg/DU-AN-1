@@ -28,9 +28,10 @@ class GioHang
     {
         try {
             $sql = "SELECT chi_tiet_gio_hangs.*, san_phams.ten_san_pham, san_phams.hinh_anh, san_phams.gia_san_pham, san_phams.gia_khuyen_mai
-              FROM chi_tiet_gio_hangs
-              INNER JOIN san_phams ON chi_tiet_gio_hangs.san_pham_id = san_phams.id
-              WHERE chi_tiet_gio_hangs.gio_hang_id = :gio_hang_id";
+                FROM chi_tiet_gio_hangs
+                INNER JOIN san_phams ON chi_tiet_gio_hangs.san_pham_id = san_phams.id
+                WHERE chi_tiet_gio_hangs.gio_hang_id = :gio_hang_id";
+
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(
                 [
@@ -90,25 +91,44 @@ class GioHang
 
 
 
-    public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong)
-    {
-        try {
-            $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong) VALUES(:gio_hang_id, :san_pham_id, :so_luong)";
+    public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong, $size, $mau_sac)
+{
+    try {
+        // Kiểm tra sản phẩm đã có chưa
+        $tonTai = $this->getChiTietGioHangTonTai($gio_hang_id, $san_pham_id, $size, $mau_sac);
+        
+        if ($tonTai) {
+            // Nếu đã có, cộng thêm số lượng
+            $sql = "UPDATE chi_tiet_gio_hangs 
+                    SET so_luong = so_luong + :so_luong 
+                    WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute(
-                [
-                    ':gio_hang_id' => $gio_hang_id,
-                    ':san_pham_id' => $san_pham_id,
-                    ':so_luong' => $so_luong,
-
-
-                ]
-            );
-            return true;
-        } catch (Exception $e) {
-            echo "Lỗi: " . $e->getMessage();
+            $stmt->execute([
+                ':so_luong' => $so_luong,
+                ':id' => $tonTai['id']
+            ]);
+        } else {
+            // Nếu chưa có, thêm mới
+            $sql = "INSERT INTO chi_tiet_gio_hangs 
+                    (gio_hang_id, san_pham_id, so_luong, size, mau_sac) 
+                    VALUES(:gio_hang_id, :san_pham_id, :so_luong, :size, :mau_sac)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':gio_hang_id' => $gio_hang_id,
+                ':san_pham_id' => $san_pham_id,
+                ':so_luong' => $so_luong,
+                ':size' => $size,
+                ':mau_sac' => $mau_sac,
+            ]);
         }
+
+        return true;
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
     }
+}
+
+
 
 
 public function deleteChiTietGioHang($chi_tiet_gio_hang_id)
@@ -136,6 +156,7 @@ public function deleteAllChiTietGioHang($gio_hang_id)
             echo "Lỗi: " . $e->getMessage();
         }
     }
+<<<<<<< HEAD
     public function deleteChiTietGioHangTheoSP($gio_hang_id, $san_pham_id)
     {
         try {
@@ -146,10 +167,54 @@ public function deleteAllChiTietGioHang($gio_hang_id)
                 ':san_pham_id' => $san_pham_id
             ]);
             return true;
+=======
+    public function getChiTietGioHangTonTai($gio_hang_id, $san_pham_id, $size, $mau_sac)
+{
+    try {
+        $sql = "SELECT * FROM chi_tiet_gio_hangs 
+                WHERE gio_hang_id = :gio_hang_id 
+                AND san_pham_id = :san_pham_id 
+                AND size = :size 
+                AND mau_sac = :mau_sac";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':gio_hang_id' => $gio_hang_id,
+            ':san_pham_id' => $san_pham_id,
+            ':size' => $size,
+            ':mau_sac' => $mau_sac
+        ]);
+        return $stmt->fetch();
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+    }
+    public function updateSoLuongTheoBienThe($gio_hang_id, $san_pham_id, $size, $mau_sac, $so_luong)
+    {
+        try {
+            $sql = "UPDATE chi_tiet_gio_hangs 
+                    SET so_luong = :so_luong 
+                    WHERE gio_hang_id = :gio_hang_id 
+                    AND san_pham_id = :san_pham_id 
+                    AND size = :size 
+                    AND mau_sac = :mau_sac";
+            $stmt = $this->conn->prepare($sql);
+            return $stmt->execute([
+                ':so_luong' => $so_luong,
+                ':gio_hang_id' => $gio_hang_id,
+                ':san_pham_id' => $san_pham_id,
+                ':size' => $size,
+                ':mau_sac' => $mau_sac
+            ]);
+>>>>>>> 6ba463a1fd84a3b43452e910b27bb1ed6c5255ac
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
     }
 
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> 6ba463a1fd84a3b43452e910b27bb1ed6c5255ac
 
 }

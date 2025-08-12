@@ -3,6 +3,11 @@
         width: 50px;
         margin-left: 30px;
     }
+    header{
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    }
     
   </style>
   <header class="header-area header-wide">
@@ -113,7 +118,6 @@
                                 <?php } else { ?>
                                     <li><a href="<?= BASE_URL ?>?act=login">Đăng nhập</a></li>
                                     <li><a href="<?= BASE_URL . '?act=form-dang-ky' ?>">Đăng ký</a></li>
-                                    <li><a href="<?= BASE_URL_ADMIN ?>">Đăng Nhập Admin</a></li>
                                 <?php } ?>
 
                                           </ul>

@@ -30,60 +30,57 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
-                                <form action="<?= BASE_URL . '?act=cap-nhat-gio-hang' ?>" method="POST">
-                                    <div class="cart-table table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th><input type="checkbox" id="checkAll" /></th>
-                                                    <th class="pro-thumbnail">Ảnh sản phẩm</th>
-                                                    <th class="pro-title">Tên sản phẩm</th>
-                                                    <th class="pro-price">Giá</th>
-                                                    <th class="pro-quantity">Số lượng</th>
-                                                    <th class="pro-subtotal">Tổng tiền</th>
-                                                    <th class="pro-remove">Thao tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $tongGioHang = 0; // Khởi tạo biến tổng tiền
-                                                foreach ($chiTietGioHang as $sanPham) {
-                                                    $giaSanPham = $sanPham['gia_khuyen_mai'] > 0 ? $sanPham['gia_khuyen_mai'] : $sanPham['gia_san_pham'];
-                                                    $tongTien = $giaSanPham * $sanPham['so_luong'];
-                                                    $tongGioHang += $tongTien;
-                                                ?>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox-item" name="xoa[]" value="<?= $sanPham['san_pham_id'] ?>"></td>
-                                                        <td class="pro-thumbnail">
-                                                            <img class="img-fluid" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="<?= $sanPham['ten_san_pham'] ?>">
-                                                        </td>
-                                                        <td class="pro-title"><?= $sanPham['ten_san_pham'] ?></td>
-                                                        <td class="pro-price"><span><?= formatPrice($giaSanPham) . ' đ' ?></span></td>
-                                                        <td class="pro-quantity">
-                                                            <div class="pro-qty">
-                                                                <input type="number" name="so_luong[]" value="<?= $sanPham['so_luong'] ?>" min="1">
-                                                                <input type="hidden" name="san_pham_id[]" value="<?= $sanPham['san_pham_id'] ?>">
-                                                            </div>
-                                                        </td>
-                                                        <td class="pro-subtotal"><span><?= formatPrice($tongTien) . ' đ' ?></span></td>
-                                                        <td class="pro-remove" style="text-align:center;">
-                                                            <a href="<?= BASE_URL . '?act=xoaSanPhamGioHang&id_chi_tiet_gio_hang=' . $sanPham['id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger" style="font-size:18px; padding:6px 16px; border-radius:6px;">
-                                                                <i class="fa fa-trash-o"></i> Xóa
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div style="margin-top: 15px;">
-                                        <button type="submit" name="xoa_da_chon" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa các sản phẩm đã chọn?');">
-                                            <i class="fa fa-trash"></i> Xóa Đã Chọn
-                                        </button>
+                            <form action="<?= BASE_URL . '?act=cap-nhat-gio-hang' ?>" method="POST">
+                                <div class="cart-table table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="pro-thumbnail">Ảnh sản phẩm</th>
+                                                <th class="pro-title">Tên sản phẩm</th>
+                                                <th class="pro-price">Giá</th>
+                                                <th class="pro-quantity">Số lượng</th>
+                                                <th class="pro-subtotal">Tổng tiền</th>
+                                                <th class="pro-remove">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $tongGioHang = 0;
 
-                                        <button type="submit" class="btn btn-primary">Cập Nhật Giỏ Hàng</button>
-                                    </div>
-                                </form>
+                                            foreach ($chiTietGioHang as $sanPham) {
+                                                $giaSanPham = $sanPham['gia_khuyen_mai'] > 0 ? $sanPham['gia_khuyen_mai'] : $sanPham['gia_san_pham'];
+                                                $tongTien = $giaSanPham * $sanPham['so_luong'];
+                                                $tongGioHang += $tongTien;
+                                            ?>
+                                                <tr>
+                                                    <td class="pro-thumbnail">
+                                                        <img class="img-fluid" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="<?= $sanPham['ten_san_pham'] ?>">
+                                                    </td>
+                                                    <td class="pro-title"><?= $sanPham['ten_san_pham'] ?></td>
+                                                    <td class="pro-price">
+                                                        <span><?= formatPrice($giaSanPham) . ' đ' ?></span>
+                                                    </td>
+                                                    <td class="pro-quantity">
+                                                        <div class="pro-qty">
+                                                            <input type="number" name="so_luong[]" value="<?= $sanPham['so_luong'] ?>" min="1">
+                                                            <input type="hidden" name="san_pham_id[]" value="<?= $sanPham['san_pham_id'] ?>" >
+                                                        </div>
+                                                    </td>
+                                                    <td class="pro-subtotal">
+                                                        <span><?= formatPrice($tongTien) . ' đ' ?></span>
+                                                    </td>
+                                                    <td class="pro-remove" style="text-align:center;">
+                                                        <a href="<?= BASE_URL . '?act=xoaSanPhamGioHang&id_chi_tiet_gio_hang=' . $sanPham['id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger" style="font-size:18px; padding:6px 16px; border-radius:6px; display:inline-block;">
+                                                            <i class="fa fa-trash-o"></i> Xóa
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-sqr btn-primary">Cập Nhật Giỏ Hàng</button>
+                            </form>
 
                                 <script>
                                     document.getElementById('checkAll').addEventListener('change', function () {

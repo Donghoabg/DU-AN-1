@@ -28,11 +28,11 @@ class ProductModel {
 
     if (!empty($filters['price_range'])) {
         if ($filters['price_range'] == '1') {
-            $sql .= " AND s.gia_khuyen_mai < 500000";
+            $sql .= " AND s.gia_khuyen_mai < 100000";
         } elseif ($filters['price_range'] == '2') {
-            $sql .= " AND s.gia_khuyen_mai BETWEEN 500000 AND 1000000";
+            $sql .= " AND s.gia_khuyen_mai BETWEEN 100000 AND 500000";
         } elseif ($filters['price_range'] == '3') {
-            $sql .= " AND s.gia_khuyen_mai > 1000000";
+            $sql .= " AND s.gia_khuyen_mai > 500000";
         }
     }
 
@@ -201,11 +201,11 @@ public function countFilteredProducts($filters) {
 
     if (!empty($filters['price_range'])) {
         if ($filters['price_range'] == '1') {
-            $sql .= " AND s.gia_khuyen_mai < 500000";
+            $sql .= " AND s.gia_khuyen_mai < 100000";
         } elseif ($filters['price_range'] == '2') {
-            $sql .= " AND s.gia_khuyen_mai BETWEEN 500000 AND 1000000";
+            $sql .= " AND s.gia_khuyen_mai BETWEEN 100000 AND 500000";
         } elseif ($filters['price_range'] == '3') {
-            $sql .= " AND s.gia_khuyen_mai > 1000000";
+            $sql .= " AND s.gia_khuyen_mai > 500000";
         }
     }
 
@@ -218,5 +218,6 @@ public function countFilteredProducts($filters) {
     $stmt->execute($params);
     return $stmt->fetchColumn();
 }
+
 
 }
