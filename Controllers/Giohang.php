@@ -99,7 +99,7 @@ class GioHangDonHangController
             header('Location:' . BASE_URL . '?act=login');
         }
     }
-   public function capNhatGioHang()
+    public function capNhatGioHang()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_SESSION['user_client'])) {
