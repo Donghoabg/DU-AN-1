@@ -36,7 +36,6 @@ body {
     cursor: pointer;
     border: 1px solid #ccc;
     background-color: white;
-    border-radius: 4px;
 }
 
 .dropdown-menu {
@@ -46,6 +45,7 @@ body {
     z-index: 100;
     background: white;
     border: 1px solid #ccc;
+    
     width: 150px;
     display: none;
     flex-direction: column;
@@ -56,12 +56,12 @@ body {
 }
 
 .dropdown-item {
-    padding: 10px;
-    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 8px;
     border-bottom: 1px solid #eee;
     background-color: white;
     text-align: left;
-    border-radius: 0;
 }
 
 .dropdown-item:hover {
@@ -268,9 +268,9 @@ body {
             <div class="dropdown-toggle">Khoảng giá</div>
             <div class="dropdown-menu">
                 <button class="dropdown-item" type="submit" name="price" value="">Tất cả</button>
-                <button class="dropdown-item" type="submit" name="price" value="1">Dưới 500k</button>
-                <button class="dropdown-item" type="submit" name="price" value="2">500k - 1tr</button>
-                <button class="dropdown-item" type="submit" name="price" value="3">Trên 1tr</button>
+                <button class="dropdown-item" type="submit" name="price" value="1">Dưới 100k</button>
+                <button class="dropdown-item" type="submit" name="price" value="2">100k - 500k</button>
+                <button class="dropdown-item" type="submit" name="price" value="3">Trên 500k</button>
             </div>
         </div>
     </form>

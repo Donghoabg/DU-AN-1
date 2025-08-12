@@ -118,7 +118,6 @@
                                 <?php } else { ?>
                                     <li><a href="<?= BASE_URL ?>?act=login">Đăng nhập</a></li>
                                     <li><a href="<?= BASE_URL . '?act=form-dang-ky' ?>">Đăng ký</a></li>
-                                    <li><a href="<?= BASE_URL_ADMIN ?>">Đăng Nhập Admin</a></li>
                                 <?php } ?>
 
                                           </ul>

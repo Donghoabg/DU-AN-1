@@ -23,13 +23,13 @@ class ProductModel {
         if ($filters['price_range']) {
             switch ($filters['price_range']) {
                 case '1':
-                    $sql .= " AND gia_khuyen_mai < 500000";
+                    $sql .= " AND gia_khuyen_mai < 100000";
                     break;
                 case '2':
-                    $sql .= " AND gia_khuyen_mai BETWEEN 500000 AND 1000000";
+                    $sql .= " AND gia_khuyen_mai BETWEEN 100000 AND 500000";
                     break;
                 case '3':
-                    $sql .= " AND gia_khuyen_mai > 1000000";
+                    $sql .= " AND gia_khuyen_mai > 500000";
                     break;
             }
         }

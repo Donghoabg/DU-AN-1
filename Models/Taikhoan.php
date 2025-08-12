@@ -21,9 +21,11 @@ class TaiKhoan{
             }
 
             // Kiểm tra mật khẩu
-            if ($mat_khau !== $user['mat_khau']) {
+            // Kiểm tra mật khẩu
+            if (!password_verify($mat_khau, $user['mat_khau'])) {
                 return 'Mật khẩu không đúng';
             }
+
 
 
             // Kiểm tra vai trò

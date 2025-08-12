@@ -275,61 +275,59 @@ class TaiKhoanController
     }
 
     public function doiMatKhau()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Lấy thông tin từ form
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Lấy thông tin từ form
+        $old_pass = htmlspecialchars(trim($_POST['old_pass']));
+        $new_pass = htmlspecialchars(trim($_POST['new_pass']));
+        $confirm_pass = htmlspecialchars(trim($_POST['confirm_pass']));
 
-            $old_pass = htmlspecialchars(trim($_POST['old_pass']));
-            $new_pass = htmlspecialchars(trim($_POST['new_pass']));
-            $confirm_pass = htmlspecialchars(trim($_POST['confirm_pass']));
+        // Lấy thông tin user từ session
+        $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
 
-            // Lấy thông tin user từ session
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+        // Kiểm tra mật khẩu cũ
+        $errors = [];
+        if (empty($old_pass)) {
+            $errors['old_pass'] = 'Mật khẩu cũ không được để trống';
+        } elseif (!password_verify($old_pass, $user['mat_khau'])) { // Sửa ở đây
+            $errors['old_pass'] = 'Mật khẩu cũ không đúng';
+        }
 
-            // Kiểm tra mật khẩu cũ
-            $errors = [];
-            if (empty($old_pass)) {
-                $errors['old_pass'] = 'Mật khẩu cũ không được để trống';
-            } elseif ($old_pass !== $user['mat_khau']) {
-                $errors['old_pass'] = 'Mật khẩu cũ không đúng';
-            }
+        // Kiểm tra mật khẩu mới
+        if (empty($new_pass)) {
+            $errors['new_pass'] = 'Mật khẩu mới không được để trống';
+        }
 
-            // Kiểm tra mật khẩu mới
-            if (empty($new_pass)) {
-                $errors['new_pass'] = 'Mật khẩu mới không được để trống';
-            }
+        // Kiểm tra xác nhận mật khẩu
+        if (empty($confirm_pass)) {
+            $errors['confirm_pass'] = 'Mật khẩu nhập lại không được để trống';
+        } elseif ($new_pass !== $confirm_pass) {
+            $errors['confirm_pass'] = 'Mật khẩu nhập lại không đúng';
+        }
 
-            // Kiểm tra xác nhận mật khẩu
-            if (empty($confirm_pass)) {
-                $errors['confirm_pass'] = 'Mật khẩu nhập lại không được để trống';
-            } elseif ($new_pass !== $confirm_pass) {
-                $errors['confirm_pass'] = 'Mật khẩu nhập lại không đúng';
-            }
-
-            // Nếu có lỗi, lưu vào session và chuyển hướng
-            if (!empty($errors)) {
-                $_SESSION['errors'] = $errors;
-                $_SESSION['flash'] = true;
-                header("Location:" . BASE_URL . '?act=tai-khoan');
-                exit();
-            }
-
-            // Nếu không có lỗi, cập nhật mật khẩu mới
-            $hashPass = $new_pass;
-            $status = $this->modelTaiKhoan->resetPassword($user['id'], $hashPass);
-            // var_dump($hashPass);
-            // die();
-
-            if ($status) {
-                $_SESSION['success'] = "Đã đổi mật khẩu thành công";
-                $_SESSION['flash'] = true;
-            } else {
-                $_SESSION['errors']['system'] = "Có lỗi xảy ra, vui lòng thử lại sau.";
-            }
-
-            // Chuyển hướng sau khi xử lý
+        // Nếu có lỗi, lưu vào session và chuyển hướng
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            $_SESSION['flash'] = true;
             header("Location:" . BASE_URL . '?act=tai-khoan');
             exit();
         }
+
+        // Nếu không có lỗi, cập nhật mật khẩu mới (hash trước khi lưu)
+        $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+        $status = $this->modelTaiKhoan->resetPassword($user['id'], $hashPass);
+
+        if ($status) {
+            $_SESSION['success'] = "Đã đổi mật khẩu thành công";
+            $_SESSION['flash'] = true;
+        } else {
+            $_SESSION['errors']['system'] = "Có lỗi xảy ra, vui lòng thử lại sau.";
+        }
+
+        // Chuyển hướng sau khi xử lý
+        header("Location:" . BASE_URL . '?act=tai-khoan');
+        exit();
     }
+    }
+
 }

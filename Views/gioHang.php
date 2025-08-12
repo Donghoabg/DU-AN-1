@@ -39,8 +39,10 @@
                                                 <th class="pro-title">Tên sản phẩm</th>
                                                 <th class="pro-price">Giá</th>
                                                 <th class="pro-quantity">Số lượng</th>
-                                                <th class="pro-subtotal">Tổng tiền</th>
-                                                <th class="pro-remove">Thao tác</th>
+                                                <th class="pro-subtotal">Size</th>
+                                                <th class="pro-remove">Màu sắc</th>
+                                                <th>Giá tiền</th>
+                                                <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
