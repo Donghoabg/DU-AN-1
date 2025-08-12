@@ -39,10 +39,8 @@
                                                 <th class="pro-title">Tên sản phẩm</th>
                                                 <th class="pro-price">Giá</th>
                                                 <th class="pro-quantity">Số lượng</th>
-                                                <th class="pro-subtotal">Size</th>
-                                                <th class="pro-remove">Màu sắc</th>
-                                                <th>Giá tiền</th>
-                                                <th>Thao tác</th>
+                                                <th class="pro-subtotal">Tổng tiền</th>
+                                                <th class="pro-remove">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,7 +57,6 @@
                                                         <img class="img-fluid" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="<?= $sanPham['ten_san_pham'] ?>">
                                                     </td>
                                                     <td class="pro-title"><?= $sanPham['ten_san_pham'] ?></td>
-                                                    
                                                     <td class="pro-price">
                                                         <span><?= formatPrice($giaSanPham) . ' đ' ?></span>
                                                     </td>
@@ -69,15 +66,6 @@
                                                             <input type="hidden" name="san_pham_id[]" value="<?= $sanPham['san_pham_id'] ?>" >
                                                         </div>
                                                     </td>
-                                                    <?php
-                                                    $size = isset($sanPham['size']) && $sanPham['size'] != '' ? $sanPham['size'] : 'L';
-                                                    $mau_sac = isset($sanPham['mau_sac']) && $sanPham['mau_sac'] != '' ? $sanPham['mau_sac'] : 'xanh';
-                                                    ?>
-
-                                                    <td><?= htmlspecialchars($size) ?></td>
-                                                    <td><?= htmlspecialchars($mau_sac) ?></td>
-
-
                                                     <td class="pro-subtotal">
                                                         <span><?= formatPrice($tongTien) . ' đ' ?></span>
                                                     </td>
@@ -94,7 +82,14 @@
                                 <button type="submit" class="btn btn-sqr btn-primary">Cập Nhật Giỏ Hàng</button>
                             </form>
 
-                    </div>
+                                <script>
+                                    document.getElementById('checkAll').addEventListener('change', function () {
+                                        const checkboxes = document.querySelectorAll('input[name="xoa[]"]');
+                                        checkboxes.forEach(cb => cb.checked = this.checked);
+                                    });
+                                </script>
+
+                        </div>
                     <div class="row">
                         <div class="col-lg-5 ml-auto">
                             <!-- Cart Calculation Area -->

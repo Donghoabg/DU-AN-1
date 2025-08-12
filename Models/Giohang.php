@@ -156,6 +156,18 @@ public function deleteAllChiTietGioHang($gio_hang_id)
             echo "Lỗi: " . $e->getMessage();
         }
     }
+<<<<<<< HEAD
+    public function deleteChiTietGioHangTheoSP($gio_hang_id, $san_pham_id)
+    {
+        try {
+            $sql = "DELETE FROM chi_tiet_gio_hangs WHERE gio_hang_id = :gio_hang_id AND san_pham_id = :san_pham_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':gio_hang_id' => $gio_hang_id,
+                ':san_pham_id' => $san_pham_id
+            ]);
+            return true;
+=======
     public function getChiTietGioHangTonTai($gio_hang_id, $san_pham_id, $size, $mau_sac)
 {
     try {
@@ -193,12 +205,16 @@ public function deleteAllChiTietGioHang($gio_hang_id)
                 ':size' => $size,
                 ':mau_sac' => $mau_sac
             ]);
+>>>>>>> 6ba463a1fd84a3b43452e910b27bb1ed6c5255ac
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
         }
     }
 
+<<<<<<< HEAD
+=======
 
     
+>>>>>>> 6ba463a1fd84a3b43452e910b27bb1ed6c5255ac
 
 }

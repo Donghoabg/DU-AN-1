@@ -141,9 +141,212 @@
                                     <?php } ?>
 
 
+<<<<<<< HEAD
                                 </div>
                                 <div class="pro-nav slick-row-10 slick-arrow-style">
                                     <?php foreach ($listAnhSanPham as $key => $anhSanPham) { ?>
+=======
+<<<<<<< HEAD
+                                </div>
+                                <div class="pro-nav slick-row-10 slick-arrow-style">
+                                    <?php foreach ($listAnhSanPham as $key => $anhSanPham) { ?>
+
+                                        <div class="pro-nav-thumb">
+                                        <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>"alt="product-details"
+                                                style='width:75px; height: 75px;' />
+                                        </div>
+                                    <?php } ?>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="product-details-des">
+                                    <div class="manufacturer-name">
+                                        <a href="#"><?= $sanPham['ten_danh_muc'] ?></a>
+                                    </div>
+                                    <h3 class="product-name"><?= $sanPham['ten_san_pham'] ?></h3>
+                                    <div class="ratings d-flex">
+                                        <div class="pro-review">
+                                            <?php $countComment = count($listBinhLuan); ?>
+                                            <span><?= $countComment . ' Bình luận' ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="price-box">
+                                        <?php if ($sanPham['gia_khuyen_mai'] > 0) { ?>
+                                            <span
+                                                class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ'; ?></span>
+                                            <span
+                                                class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']) . 'đ'; ?></del></span>
+                                        <?php } else { ?>
+                                            <span
+                                                class="price-regular"><?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?></span>
+                                        <?php }    ?>
+
+                                    </div>
+
+                                    <!-- check số lượng sản phẩm  -->
+                                    <div class="availability">
+                                        <i class="fa fa-check-circle"></i>
+                                        <span><?= $sanPham['so_luong'] . ' sản phẩm' ?></span>
+                                    </div>
+
+                                    <p class="pro-desc"><?= $sanPham['mo_ta'] ?></p>
+                                    <form action="submit.php" method="post" style="font-family: Arial, sans-serif;">
+                                        <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+                                            KÍCH THƯỚC 
+                                            <span style="text-decoration: underline; font-size: 14px; color: #333; cursor: pointer;">
+                                            Hướng Dẫn Chọn Size
+                                            </span>
+                                        </div>
+
+                                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                            <input type="radio" name="size" value="2XL" id="s2xl" style="display: none;">
+                                            <label for="s2xl" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">2XL</label>
+
+                                            <input type="radio" name="size" value="XL" id="sxl" style="display: none;">
+                                            <label for="sxl" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">XL</label>
+
+                                            <input type="radio" name="size" value="L" id="sl" style="display: none;">
+                                            <label for="sl" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">L</label>
+
+                                            <input type="radio" name="size" value="M" id="sm" style="display: none;">
+                                            <label for="sm" style="width: 50px; height: 50px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">M</label>
+                                        </div>
+
+                                        <button type="submit" style="margin-top: 15px; padding: 8px 20px; cursor: pointer;">Xác Nhận</button>
+                                        </form>
+                                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="POST" onsubmit="return themVaoGioHangAjax(this, event)">
+
+                                            <div class="quantity-cart-box d-flex align-items-center">
+                                                <h6 class="option-title">Số lượng:</h6>
+                                                <div class="quantity">
+                                                    <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                    <div class="pro-qty">
+                                                        <input type="number" value="1" name="so_luong" min="1" max="<?= $sanPham['so_luong'] ?>">
+                                                        <div id="soLuongMsg" class="so-luong-error" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="action_link">
+                                                    <button class="btn btn-cart2" type="submit">Thêm vào giỏ hàng</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                <script>
+                                function themVaoGioHangAjax(form, event) {
+                                    event.preventDefault();
+                                    var formData = new FormData(form);
+                                    fetch('<?= BASE_URL . '?act=them-gio-hang' ?>', {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        alert('Đã thêm vào giỏ hàng!');
+                                    })
+                                    .catch(error => {
+                                        alert('Có lỗi xảy ra!');
+                                    });
+                                    return false;
+                                }
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- product details inner end -->
+
+                    <!-- product details reviews start -->
+                    <div class="product-details-reviews section-padding pb-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="product-review-info">
+                                    <ul class="nav review-tab">
+
+                                        <li>
+                                            <a class="active" data-bs-toggle="tab" href="#tab_three">Bình luận
+                                                (<?= $countComment ?>)</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content reviews-tab">
+
+                                        <div class="tab-pane fade show active" id="tab_three">
+
+                                            <div class="tab-content reviews-tab">
+                                                <div class="tab-pane fade show active" id="tab_three">
+
+                                                    <!-- Hiển thị danh sách bình luận -->
+                                                    <?php foreach ($listBinhLuan as $binhLuan): ?>
+                                                        <div class="total-reviews d-flex align-items-start mb-3">
+                                                            <div class="rev-avatar me-3">
+                                                                <img src="<?= htmlspecialchars($binhLuan['anh_dai_dien']) ?>" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;">
+                                                            </div>
+                                                            <div class="review-box w-100">
+                                                                <div class="post-author mb-2">
+                                                                    <p class="mb-1">
+                                                                        <strong><?= htmlspecialchars($binhLuan['ho_ten']) ?></strong>
+                                                                        <small class="text-muted ms-2"><?= htmlspecialchars($binhLuan['ngay_dang']) ?></small>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="mb-2"><?= htmlspecialchars($binhLuan['noi_dung']) ?></p>
+                                                                <!-- Nút "Thu Hồi Bình Luận" căn phải -->
+                                                                <div class="text-end">
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+
+                                                    <!-- Form gửi bình luận -->
+                                                    <form action="<?= BASE_URL . '?act=gui-binh-luan' ?>" method="POST" class="review-form">
+                                                        <!-- Gửi ID sản phẩm qua form -->
+                                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+
+                                                        <!-- Kiểm tra nếu người dùng chưa đăng nhập -->
+                                                        <?php if (!isset($_SESSION['user_client'])): ?>
+                                                            <p class="text-danger">Vui lòng <a href="<?= BASE_URL . '?act=login' ?>">đăng nhập</a> để gửi bình luận.</p>
+                                                        <?php else: ?>
+                                                            <!-- Gửi ID tài khoản người dùng qua form -->
+                                                            <input type="hidden" name="tai_khoan_id" value="<?= $_SESSION['user_client'] ?>">
+
+                                                            <div class="form-group row">
+                                                                <div class="col">
+                                                                    <label for="binh_luan" class="col-form-label">
+                                                                        <span class="text-danger">*</span> Nội Dung Bình Luận
+                                                                    </label>
+                                                                    <textarea name="binh_luan" class="form-control" id="binh_luan" rows="3" required></textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group mt-3">
+                                                                <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product details reviews end -->
+                </div>
+                <!-- product details wrapper end -->
+            </div>
+=======
+        <div class="availability">Còn hàng: <?= htmlspecialchars($sanPham['so_luong']) ?> sản phẩm</div>
+        <div class="kethang"></div>
+        <div class="product-price">
+            <?= formatPrice($sanPham['gia_khuyen_mai'] ?: $sanPham['gia_san_pham']) ?>đ
+            <?php if($sanPham['gia_khuyen_mai']): ?>
+                <span class="product-old-price"><?= formatPrice($sanPham['gia_san_pham']) ?>đ</span>
+            <?php endif; ?>
+>>>>>>> 6ba463a1fd84a3b43452e910b27bb1ed6c5255ac
+        </div>
+>>>>>>> 539756e213eeda9d2bedb85d3f469d7cd730c1d6
 
                                         <div class="pro-nav-thumb">
                                         <img src="<?= BASE_URL . $anhSanPham['link_hinh_anh'] ?>"alt="product-details"
