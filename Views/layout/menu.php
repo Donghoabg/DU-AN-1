@@ -47,9 +47,11 @@
                                           <li class="dropdown">
                                               <a href="#">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                               <ul class="dropdown">
-                                                  <?php foreach ($listDanhMuc as $danhMuc) { ?>
-                                                      <li><a href="<?= BASE_URL . '?act=products&category=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
-                                                  <?php  } ?>
+                                                  <?php foreach ($listDanhMuc as $danhMuc) {
+                                                      if (!isset($danhMuc['trang_thai']) || $danhMuc['trang_thai'] == 1) { ?>
+                                                          <li><a href="<?= BASE_URL . '?act=products&category=' . $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
+                                                      <?php }
+                                                  } ?>
                                               </ul>
                                           </li>
                                           <li><a href="<?= BASE_URL . '?act=gioi-thieu' ?>">Giới thiệu</a></li>
@@ -113,7 +115,6 @@
                                 <?php } else { ?>
                                     <li><a href="<?= BASE_URL ?>?act=login">Đăng nhập</a></li>
                                     <li><a href="<?= BASE_URL . '?act=form-dang-ky' ?>">Đăng ký</a></li>
-                                    <li><a href="<?= BASE_URL_ADMIN ?>">Đăng Nhập Admin</a></li>
                                 <?php } ?>
 
                                           </ul>

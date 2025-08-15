@@ -8,6 +8,24 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <!-- Bộ lọc -->
         <form method="GET" action="" class="d-flex flex-wrap gap-2">
+            <!-- Bộ lọc danh mục -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Danh mục
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?act=products">Tất cả</a></li>
+                    <?php foreach ($categories as $cat): ?>
+                        <?php if (!isset($cat['trang_thai']) || $cat['trang_thai'] == 1): ?>
+                            <li>
+                                <button class="dropdown-item" type="submit" name="category" value="<?= $cat['id'] ?>">
+                                    <?= htmlspecialchars($cat['ten_danh_muc']) ?>
+                                </button>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
             <input type="hidden" name="act" value="products">
 
             <!-- Màu sắc -->
