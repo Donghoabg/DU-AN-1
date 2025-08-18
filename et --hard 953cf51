@@ -1,0 +1,112 @@
+[33mbfee74a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #26 from Donghoabg/vanhoa
+[33md75f4af[m[33m ([m[1;31morigin/vanhoa[m[33m)[m Merge branch 'main' into vanhoa
+[33m953cf51[m Merge pull request #25 from Donghoabg/Thanh
+[33m33edb3b[m bổ sung
+[33m1e7a972[m fixCheckbox
+[33m8c931b7[m Merge branch 'Thanh' of https://github.com/Donghoabg/DU-AN-1 into Thanh
+[33m0def694[m ảnh sp
+[33m0568be4[m add size
+[33m539756e[m Resolve merge conflicts after pull origin main
+[33m6ba463a[m Merge pull request #24 from Donghoabg/vanhoa
+[33m73d042f[m bổ sung login
+[33m90b110a[m bổ sung
+[33m7b64a33[m Merge pull request #23 from Donghoabg/vanhoa
+[33m5cb6848[m Merge branch 'main' into vanhoa
+[33m49cb365[m fixx
+[33mbaa9cd6[m thay đổi trang chi tiết
+[33me3cb782[m Chỉnh lại trang
+[33m2814335[m checkbox
+[33mbf58e38[m Merge branch 'main' of https://github.com/Donghoabg/DU-AN-1 into Thanh
+[33ma965240[m add size
+[33mc2f4ce0[m Merge pull request #22 from Donghoabg/vinh
+[33mca1b62a[m thay lại tên
+[33mff66ba3[m Merge pull request #21 from Donghoabg/vanhoa
+[33m212e7cf[m fixx
+[33ma1f827e[m sửa lên tên
+[33m873e208[m sửa lại
+[33m22e9e8c[m làm lại và bỏ phần "xóa"
+[33m9aa4e3a[m Bổ sung
+[33m4044349[m sửa trang menu
+[33m16c134c[m Merge pull request #19 from Donghoabg/Thanh
+[33m25ee66e[m đương dẫn
+[33m59b70ff[m fix loi
+[33m5bef3a3[m Merge pull request #18 from Donghoabg/vanhoa
+[33m504e190[m Bổ sung
+[33mb3957d3[m Merge pull request #17 from Donghoabg/Thanh
+[33m62efca1[m Fixx thanh toan
+[33mab32488[m Merge pull request #16 from Donghoabg/vanhoa
+[33md37b962[m Bổ sung ảnh
+[33m481f1d9[m Sửa lỗi hiển thị
+[33m448496a[m fix
+[33m84bdff3[m Merge pull request #15 from Donghoabg/vanhoa
+[33m2cef989[m bổ sung
+[33m2b086bd[m Merge pull request #14 from Donghoabg/Thanh
+[33m467db40[m sửa lỗi đơn hàng
+[33m3a72b1a[m Model + Controller
+[33m3ad1bc6[m Merge pull request #13 from Donghoabg/vanhoa
+[33m20b02ea[m Add file chi tiet
+[33mc25aae7[m Fix menu
+[33mf11ba44[m Merge pull request #12 from Donghoabg/Thanh
+[33ma07abac[m Merge branch 'main' into Thanh
+[33mf190449[m bo sung them
+[33m253eceb[m bo sung them
+[33m8b470ef[m Merge pull request #11 from Donghoabg/vanhoa
+[33ma8e5387[m int
+[33m0825cb9[m fix lỗi
+[33me3ac1b6[m image
+[33mf08276b[m Sửa font
+[33mcfd0a9a[m Fix lỗi
+[33mfcb0e71[m Sửa lỗi sản phẩm
+[33ma33993f[m Sửa lỗi sản phẩm
+[33ma99be39[m bo sung
+[33mf1aec2e[m bo sung bieu do, tai khoan, binh luan
+[33m6974a42[m COntrollers Danh sach
+[33m188db39[m Merge pull request #10 from Donghoabg/Thanh
+[33m9d49e05[m update controllers vs layout
+[33m06b0bfd[m Merge pull request #9 from Donghoabg/Thanh
+[33m129ec3d[m Controllers
+[33mbe0cf9e[m Fix lỗi sản phẩm
+[33m2e9120e[m Merge pull request #8 from Donghoabg/vanhoa
+[33m5f8de99[m Bổ sung home
+[33m49a462d[m bổ sung
+[33me52adcc[m fix đăng nhập
+[33m676a253[m bổ xung
+[33m76dd957[m giao diện đơn hàng , sản phẩm admin
+[33m4536b82[m giao diện danh mục admin
+[33mae2357a[m thống kê admin
+[33m8c1a117[m Mô tả thay đổi
+[33m4beb365[m tạo file
+[33me0372dc[m thêm file
+[33m4effba9[m Merge pull request #7 from Donghoabg/vanhoa
+[33m16f31e3[m Form login logout
+[33m181c270[m From đăng nhập, kiểm tra
+[33m77979c9[m Merge pull request #6 from Donghoabg/vanhoa
+[33mfe18b8d[m thêm update tài khoản
+[33mb004a8a[m Merge pull request #5 from Donghoabg/giaodien
+[33ma3d1a52[m[33m ([m[1;31morigin/giaodien[m[33m, [m[1;32mgiaodien[m[33m)[m Bổ sung phần đăng nhập
+[33m0ceccdd[m sửa đang nhập
+[33mdfc6f76[m Xử lý controller
+[33mf16f102[m BO SUNG
+[33m45affff[m day len roi day
+[33m9a8607e[m gio moi day len
+[33mb593115[m du-an-1-main
+[33m44adcb8[m Merge pull request #4 from Donghoabg/giaodien
+[33m33f352b[m Bổ sung giới thiệu
+[33m425e7de[m Merge pull request #3 from Donghoabg/giaodien
+[33m272ad96[m Bổ sung index
+[33m32546e1[m menu
+[33mb11be30[m menu
+[33m738c25c[m menu
+[33m08352fb[m Header
+[33mf958276[m layout
+[33m117af95[m int
+[33m2b463b6[m int
+[33mde3fd69[m INT
+[33mc1e4a59[m INT
+[33m47457a1[m INT
+[33m29662f5[m Merge pull request #2 from Donghoabg/test
+[33m4e719d5[m int
+[33m55e13ac[m 17/7
+[33m66b5e9f[m int
+[33meeef791[m INT
+[33mc5593b3[m Initial commit
