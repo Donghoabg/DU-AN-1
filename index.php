@@ -48,7 +48,6 @@ match ($act) {
     'search' => (new HomeController())->timKiem(),
     'lich-su-mua-hang' => (new HomeController())->lichSuMuaHang(),
     'chi-tiet-mua-hang' => (new HomeController())->chiTietMuaHang(),
-    'chi-tiet-don-hang' => (new HomeController())->chiTietDonhang(),
     'huy-don-hang' => (new HomeController())->huyDonHang(),
 
 

@@ -3,6 +3,11 @@
         width: 50px;
         margin-left: 30px;
     }
+    header{
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    }
     
   </style>
   <header class="header-area header-wide">

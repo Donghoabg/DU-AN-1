@@ -39,18 +39,22 @@
                                                 <th class="pro-title">Tên sản phẩm</th>
                                                 <th class="pro-price">Giá</th>
                                                 <th class="pro-quantity">Số lượng</th>
-                                                <th class="pro-subtotal">Tổng tiền</th>
-                                                <th class="pro-remove">Thao tác</th>
+                                                <th class="pro-subtotal">Size</th>
+                                                <th class="pro-remove">Màu sắc</th>
+                                                <th>Tổng giá</th>
+                                                <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $tongGioHang = 0;
-
                                             foreach ($chiTietGioHang as $sanPham) {
                                                 $giaSanPham = $sanPham['gia_khuyen_mai'] > 0 ? $sanPham['gia_khuyen_mai'] : $sanPham['gia_san_pham'];
                                                 $tongTien = $giaSanPham * $sanPham['so_luong'];
                                                 $tongGioHang += $tongTien;
+
+                                                $size = isset($sanPham['size']) && $sanPham['size'] != '' ? $sanPham['size'] : 'L';
+                                                $mau_sac = isset($sanPham['mau_sac']) && $sanPham['mau_sac'] != '' ? $sanPham['mau_sac'] : 'xanh';
                                             ?>
                                                 <tr>
                                                     <td class="pro-thumbnail">
@@ -61,11 +65,20 @@
                                                         <span><?= formatPrice($giaSanPham) . ' đ' ?></span>
                                                     </td>
                                                     <td class="pro-quantity">
-                                                        <div class="pro-qty">
-                                                            <input type="number" name="so_luong[]" value="<?= $sanPham['so_luong'] ?>" min="1">
-                                                            <input type="hidden" name="san_pham_id[]" value="<?= $sanPham['san_pham_id'] ?>" >
+                                                        <div class="quantity-control" style="display:flex; align-items:center; gap:6px;">
+                                                            <button type="button" class="btn-decrease" style="padding:0 10px;">-</button>
+                                                            <input type="number" name="so_luong[]" value="<?= $sanPham['so_luong'] ?>" min="1" style="width:50px; text-align:center;">
+                                                            <button type="button" class="btn-increase" style="padding:0 10px;">+</button>
+
+                                                            <!-- Các trường ẩn quan trọng -->
+                                                            <input type="hidden" name="san_pham_id[]" value="<?= $sanPham['san_pham_id'] ?>">
+                                                            <input type="hidden" name="size[]" value="<?= htmlspecialchars($size) ?>">
+                                                            <input type="hidden" name="mau_sac[]" value="<?= htmlspecialchars($mau_sac) ?>">
+                                                            <input type="hidden" name="id_chi_tiet_gio_hang[]" value="<?= $sanPham['id'] ?>">
                                                         </div>
                                                     </td>
+                                                    <td><?= htmlspecialchars($size) ?></td>
+                                                    <td><?= htmlspecialchars($mau_sac) ?></td>
                                                     <td class="pro-subtotal">
                                                         <span><?= formatPrice($tongTien) . ' đ' ?></span>
                                                     </td>
@@ -118,3 +131,23 @@
 
 <?php require_once 'layout/miniCart.php'; ?>
 <?php require_once 'layout/footer.php'; ?>
+<script>
+    document.querySelectorAll('.quantity-control').forEach(function(wrapper) {
+  const btnDecrease = wrapper.querySelector('.btn-decrease');
+  const btnIncrease = wrapper.querySelector('.btn-increase');
+  const input = wrapper.querySelector('input[name="so_luong[]"]');
+
+  btnDecrease.addEventListener('click', function() {
+    let current = parseInt(input.value);
+    if (current > 1) {
+      input.value = current - 1;
+    }
+  });
+
+  btnIncrease.addEventListener('click', function() {
+    let current = parseInt(input.value);
+    input.value = current + 1;
+  });
+});
+
+</script>

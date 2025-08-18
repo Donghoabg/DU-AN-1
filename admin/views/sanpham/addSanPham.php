@@ -117,6 +117,22 @@ include "./views/layout/header.php"
                                     <p class="text-danger"><?= $_SESSION['errors']['danh_muc_id']; ?></p>
                                 <?php } ?>
                             </div>
+                            <label>Màu sắc:</label><br>
+    <input type="checkbox" name="colors[]" value="Đỏ"> Đỏ
+    <input type="checkbox" name="colors[]" value="Xanh"> Xanh
+    <input type="checkbox" name="colors[]" value="Vàng"> Vàng
+    <input type="checkbox" name="colors[]" value="Đen"> Đen
+    <input type="checkbox" name="colors[]" value="Xám"> Xám
+    <input type="checkbox" name="colors[]" value="Nâu"> Nâu
+
+    <br><br>
+    <label>Size:</label><br>
+    <input type="checkbox" name="sizes[]" value="M"> M
+    <input type="checkbox" name="sizes[]" value="L"> L
+    <input type="checkbox" name="sizes[]" value="XL"> XL
+    <input type="checkbox" name="sizes[]" value="XXL"> XXL
+    <input type="checkbox" name="sizes[]" value="3XL"> 3XL
+    </label><br>
 
                             <div class="form-group col-md-6">
                                 <label>Trạng Thái</label>

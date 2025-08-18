@@ -21,9 +21,11 @@ class TaiKhoan{
             }
 
             // Kiểm tra mật khẩu
-            if ($mat_khau !== $user['mat_khau']) {
+            // Kiểm tra mật khẩu
+            if (!password_verify($mat_khau, $user['mat_khau'])) {
                 return 'Mật khẩu không đúng';
             }
+
 
 
             // Kiểm tra vai trò
@@ -60,29 +62,50 @@ class TaiKhoan{
     public function insertTaiKhoan($ho_ten, $ngay_sinh, $email, $so_dien_thoai, $gioi_tinh, $dia_chi, $mat_khau, $chuc_vu_id, $anh_dai_dien)
     {
         try {
-            $sql = "INSERT INTO tai_khoans (ho_ten,ngay_sinh,email,so_dien_thoai,gioi_tinh,dia_chi,mat_khau,chuc_vu_id,anh_dai_dien) VALUES (:ho_ten, :ngay_sinh,:email,:so_dien_thoai,:gioi_tinh,:dia_chi,:mat_khau,:chuc_vu_id,:anh_dai_dien)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(
-                [
-                    ':ho_ten' => $ho_ten,
-                    ':ngay_sinh' => $ngay_sinh,
-                    ':email' => $email,
-                    ':so_dien_thoai' => $so_dien_thoai,
-                    ':gioi_tinh' => $gioi_tinh,
-                    ':dia_chi' => $dia_chi,
-                    ':mat_khau' => $mat_khau,
-                    ':chuc_vu_id' => $chuc_vu_id,
-                    ':anh_dai_dien' => $anh_dai_dien,
+    $sql = "INSERT INTO tai_khoans (
+                ho_ten,
+                ngay_sinh,
+                email,
+                so_dien_thoai,
+                gioi_tinh,
+                dia_chi,
+                mat_khau,
+                chuc_vu_id,
+                anh_dai_dien
+            ) VALUES (
+                :ho_ten,
+                :ngay_sinh,
+                :email,
+                :so_dien_thoai,
+                :gioi_tinh,
+                :dia_chi,
+                :mat_khau,
+                :chuc_vu_id,
+                :anh_dai_dien
+            )";
 
+    $stmt = $this->conn->prepare($sql);
 
+    // Mã hóa mật khẩu người dùng nhập
+    $password_hash = password_hash($mat_khau, PASSWORD_DEFAULT);
 
-                ]
-            );
+    $stmt->execute([
+        ':ho_ten'       => $ho_ten,
+        ':ngay_sinh'    => $ngay_sinh,
+        ':email'        => $email,
+        ':so_dien_thoai'=> $so_dien_thoai,
+        ':gioi_tinh'    => $gioi_tinh,
+        ':dia_chi'      => $dia_chi,
+        ':mat_khau'     => $password_hash, // gán hash vào đây
+        ':chuc_vu_id'   => $chuc_vu_id,
+        ':anh_dai_dien' => $anh_dai_dien
+    ]);
 
-            return true;
-        } catch (Exception $e) {
-            echo "Lỗi: " . $e->getMessage();
-        }
+    return true;
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+
     }
 
 

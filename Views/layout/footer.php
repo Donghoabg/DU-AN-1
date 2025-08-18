@@ -37,8 +37,8 @@
                                 <address class="contact-block">
                                     <ul>
                                         <li><i class="pe-7s-home"></i> Trịnh Văn Bô,Hà Nội</li>
-                                        <li><i class="pe-7s-mail"></i> <a href="anhvdph37451@fpt.edu.vn">anhvdph37451@fpt.edu.vn </a></li>
-                                        <li><i class="pe-7s-call"></i> <a href="tel:+3866466521">+386466521</a></li>
+                                        <li><i class="pe-7s-mail"></i> <a href="anhvdph37451@fpt.edu.vn">donghoamobie@gmail.com </a></li>
+                                        <li><i class="pe-7s-call"></i> <a href="tel:+3866466521">0354863578</a></li>
                                     </ul>
                                 </address>
                             </div>
@@ -100,7 +100,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="copyright-text text-center">
-                            <p>&copy; 2024<b>NBH</b> Made in <i class="fa fa-heart text-danger"></i> VietNam</p>
+                            <p>&copy; 2025<b>NBH</b> Made in <i class="fa fa-heart text-danger"></i> VietNam</p>
                         </div>
                     </div>
                 </div>

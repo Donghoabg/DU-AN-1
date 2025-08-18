@@ -40,18 +40,26 @@ class GioHangDonHangController
 
                 $san_pham_id = $_POST['san_pham_id'];
                 $so_luong = $_POST['so_luong'];
+                $size = $_POST['size'] ?? '';
+                $mau_sac = $_POST['mau_sac'] ?? '';
+
 
                 $checkSanPham = false;
                 foreach ($chiTietGioHang as $detail) {
-                    if ($detail['san_pham_id'] == $san_pham_id) {
-                        $newSoLuong = $detail['so_luong'] + $so_luong;
-                        $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $newSoLuong);
-                        $checkSanPham = true;
-                        break;
-                    }
+                if (
+                    $detail['san_pham_id'] == $san_pham_id &&
+                    $detail['size'] == $size &&
+                    $detail['mau_sac'] == $mau_sac
+                ) {
+                    $newSoLuong = $detail['so_luong'] + $so_luong;
+                    $this->modelGioHang->updateSoLuongTheoBienThe($gioHang['id'], $san_pham_id, $size, $mau_sac, $newSoLuong);
+                    $checkSanPham = true;
+                    break;
                 }
+                }
+
                 if (!$checkSanPham) {
-                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong);
+                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong, $size, $mau_sac);
                 }
                 header('Location:' . BASE_URL . '?act=gio-hang');
             } else {
@@ -92,38 +100,41 @@ class GioHangDonHangController
         }
     }
     public function capNhatGioHang()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_SESSION['user_client'])) {
-        
-                $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-                $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
-            
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_SESSION['user_client'])) {
+            $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
 
-                $san_pham_ids = $_POST['san_pham_id'];
-             
-                $so_luongs = $_POST['so_luong'];
-                foreach ($san_pham_ids as $index => $san_pham_id) {
+            $san_pham_ids = $_POST['san_pham_id'];
+            $sizes = $_POST['size'];
+            $mau_sacs = $_POST['mau_sac'];
+            $id_chi_tiet_gio_hangs = $_POST['id_chi_tiet_gio_hang'];
+            $so_luongs = $_POST['so_luong'];
 
-                    $so_luong = $so_luongs[$index];
-                 
-                    if ($so_luong>0) {
-                     
-                        $s = $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $so_luong);
-                        
+            foreach ($so_luongs as $index => $so_luong) {
+                if ($so_luong > 0) {
+                    $san_pham_id = $san_pham_ids[$index];
+                    $size = $sizes[$index];
+                    $mau_sac = $mau_sacs[$index];
+                    $id_chi_tiet_gio_hang = $id_chi_tiet_gio_hangs[$index];
 
-                    }
+                    // Cập nhật số lượng theo biến thể
+                    $this->modelGioHang->updateSoLuongTheoBienThe($gioHang['id'], $san_pham_id, $size, $mau_sac, $so_luong);
+
+                    // Hoặc nếu có hàm update theo id chi tiết thì dùng:
+                    // $this->modelGioHang->updateSoLuongByIdChiTietGioHang($id_chi_tiet_gio_hang, $so_luong);
                 }
-                // Quay lại trang giỏ hàng
-                header('Location:' . BASE_URL . '?act=gio-hang');
-                exit;
-            } else {
-                // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
-                header('Location:' . BASE_URL . '?act=login');
-                exit;
             }
+            header('Location:' . BASE_URL . '?act=gio-hang');
+            exit;
+        } else {
+            header('Location:' . BASE_URL . '?act=login');
+            exit;
         }
     }
+    }
+
 
     public function daDatHang()
     {
