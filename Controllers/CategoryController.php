@@ -13,6 +13,10 @@ class CategoryController
     public function index()
     {
         $categories = $this->model->getAllCategories();
+        // Lọc chỉ danh mục hiện
+        $categories = array_filter($categories, function($cat) {
+            return isset($cat['trang_thai']) && $cat['trang_thai'] == 1;
+        });
         include 'Views/category_list.php';
     }
 

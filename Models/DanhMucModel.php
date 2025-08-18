@@ -57,7 +57,7 @@ class ProductModel {
     }
 
     public function getAllCategories() {
-        $stmt = $this->pdo->query("SELECT * FROM danh_mucs");
+        $stmt = $this->pdo->query("SELECT * FROM danh_mucs WHERE trang_thai = 1");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

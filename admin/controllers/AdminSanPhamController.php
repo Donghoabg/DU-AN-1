@@ -61,69 +61,69 @@ class AdminSanPhamController {
         // Upload ảnh chính
         $file_thumb = uploadFile($hinh_anh, './uploads/');
 
-        // Kiểm tra lỗi
-        $errors = [];
-        if (empty($ten_san_pham)) $errors['ten_san_pham'] = 'Tên sản phẩm không được để trống';
-        if (empty($gia_san_pham)) $errors['gia_san_pham'] = 'Giá sản phẩm không được để trống';
-        if (empty($so_luong)) $errors['so_luong'] = 'Số lượng sản phẩm không được để trống';
-        if (empty($ngay_nhap)) $errors['ngay_nhap'] = 'Ngày nhập sản phẩm không được để trống';
-        if (empty($danh_muc_id)) $errors['danh_muc_id'] = 'Vui lòng chọn danh mục sản phẩm';
-        if (empty($trang_thai)) $errors['trang_thai'] = 'Vui lòng chọn trạng thái sản phẩm';
-        if ($hinh_anh['error'] !== 0) $errors['hinh_anh'] = 'Vui lòng chọn ảnh sản phẩm';
-        if (empty($colors)) $errors['colors'] = 'Vui lòng chọn ít nhất một màu sắc';
-        if (empty($sizes)) $errors['sizes'] = 'Vui lòng chọn ít nhất một size';
+            $img_array = $_FILES['img_array'];
 
-        $_SESSION['errors'] = $errors;
-
-        if (empty($errors)) {
-            // Thêm sản phẩm vào DB
-            $san_pham_id = $this->modelSanPham->insertSanPham(
-                $ten_san_pham,
-                $gia_san_pham,
-                $gia_khuyen_mai,
-                $so_luong,
-                $ngay_nhap,
-                $danh_muc_id,
-                $trang_thai,
-                $mo_ta,
-                $file_thumb
-            );
-
-            // Thêm album ảnh nếu có
-            if (!empty($img_array['name'][0])) {
-                foreach ($img_array['name'] as $key => $value) {
-                    $file = [
-                        'name' => $img_array['name'][$key],
-                        'type' => $img_array['type'][$key],
-                        'tmp_name' => $img_array['tmp_name'][$key],
-                        'error' => $img_array['error'][$key],
-                        'size' => $img_array['size'][$key]
-                    ];
-                    $link_hinh_anh = uploadFile($file, './uploads/');
-                    $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $link_hinh_anh);
-                }
+            // Tạo 1 mảng trống để chứa dl
+            $errors = [];
+            if (empty($ten_san_pham)) {
+                $errors['ten_san_pham'] = 'Tên sản phẩm không được để trống';
+            }
+            if (empty($gia_san_pham)) {
+                $errors['gia_san_pham'] = 'Giá sản phẩm không được để trống';
+            }
+            if (empty($so_luong)) {
+                $errors['so_luong'] = 'Số lượng sản phẩm không được để trống';
+            }
+            if (empty($ngay_nhap)) {
+                $errors['ngay_nhap'] = 'Ngày nhập sản phẩm không được để trống';
+            }
+            if (empty($danh_muc_id)) {
+                $errors['danh_muc_id'] = 'Vui lòng chọn danh mục sản phẩm';
+            }
+            if (empty($trang_thai)) {
+                $errors['trang_thai'] = 'Vui lòng chọn trạng thái sản phẩm';
+            }
+            if ($hinh_anh['errors'] === '') {
+                $errors['hinh_anh'] = 'Vui lòng chọn ảnh sản phẩm';
             }
 
-            // Thêm biến thể màu + size
-            foreach ($colors as $color) {
-                foreach ($sizes as $size) {
-                    $this->modelSanPham->insertBienThe($san_pham_id, $color, $size);
-                }
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                $_SESSION['old_data'] = $_POST;
             }
 
-            // Xóa session dữ liệu cũ sau khi thêm thành công
-            unset($_SESSION['old_data']);
-            unset($_SESSION['errors']);
+            $_SESSION['errors'] = $errors;
 
-            header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
-            exit();
-        } else {
-            $_SESSION['flash'] = true;
-            header("Location: " . BASE_URL_ADMIN . '?act=form-them-san-pham');
-            exit();
+            // Nếu k có lỗi thì thêm sản phẩm
+            if (empty($errors)) {
+                $san_pham_id = $this->modelSanPham->insertSanPham($ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $file_thumb);
+                // Xử lý thêm album ảnh sp
+                if (!empty($img_array['name'])) {
+                    foreach ($img_array['name'] as $key => $value) {
+                        $file = [
+                            'name' => $img_array['name'][$key],
+                            'type' => $img_array['type'][$key],
+                            'tmp_name' => $img_array['tmp_name'][$key],
+                            'error' => $img_array['error'][$key],
+                            'size' => $img_array['size'][$key]
+                        ];
+                        $link_hinh_anh = uploadFile($file, './uploads/');
+                        $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $link_hinh_anh);
+                    }
+                }
+
+                //  var_dump($san_pham_id);die;
+                header("Location: " . BASE_URL_ADMIN . '?act=san-pham');
+                exit();
+            } else {
+                // trả lỗi
+                // Đặt chỉ thị xóa session sau khi hiển thị form
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL_ADMIN . '?act=form-them-san-pham');
+                exit();
+            }
         }
     }
-}
 
 
 

@@ -21,7 +21,8 @@
 
                             <div class="sidebar-body">
                                 <ul class="shop-categories">
-                                    <?php foreach ($listDanhMuc as $danhMuc) { ?>
+                                    <?php foreach ($listDanhMuc as $danhMuc) { 
+                                        if (!isset($danhMuc['trang_thai']) || $danhMuc['trang_thai'] == 1) { ?>
                                         <li>
                                             <a
                                                 href="<?= BASE_URL . '?act=san-pham-theo-danh-muc&danh_muc_id=' . $danhMuc['id'] ?>">
@@ -30,7 +31,8 @@
                                                 </div>
                                             </a>
                                         </li>
-                                    <?php } ?>
+                                        <?php } 
+                                    } ?>
                                 </ul>
                             </div>
                         </div>
