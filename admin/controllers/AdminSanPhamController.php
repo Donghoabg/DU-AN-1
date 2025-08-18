@@ -90,6 +90,7 @@ class AdminSanPhamController {
                 $errors['so_luong'] = 'Số lượng phải là số nguyên >= 0';
             }
 
+
             // Ngày nhập
             if (empty($ngay_nhap)) {
                 $errors['ngay_nhap'] = 'Ngày nhập sản phẩm không được để trống';
