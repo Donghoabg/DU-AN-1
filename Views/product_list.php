@@ -1,7 +1,6 @@
 <?php require_once 'layout/header.php'; ?>
 <?php require_once 'layout/menu.php'; ?>
 
-
 <div class="container mt-4">
     <h2 class="mb-4">Áo PoLo</h2>
 
