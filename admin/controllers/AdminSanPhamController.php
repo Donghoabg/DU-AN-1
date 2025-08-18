@@ -89,7 +89,7 @@ class AdminSanPhamController {
             } elseif (!ctype_digit($so_luong) || $so_luong < 0) {
                 $errors['so_luong'] = 'Số lượng phải là số nguyên >= 0';
             }
-
+            
             // Ngày nhập
             if (empty($ngay_nhap)) {
                 $errors['ngay_nhap'] = 'Ngày nhập sản phẩm không được để trống';
